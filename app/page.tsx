@@ -7,7 +7,7 @@ import TextSection from '@/components/TextSection'
 import Footer from '@/components/Footer'
 import TopSection from '@/components/TopSection'
 import GetStarted from '@/components/GetStarted'
-
+//The home page, which is made up of various components.
 export default function Home() {
   return (
     <Box className="flex flex-col text-center h-screen">

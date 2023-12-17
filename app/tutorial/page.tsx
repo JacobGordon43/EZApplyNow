@@ -4,6 +4,7 @@ import TextSection from "@/components/TextSection";
 import TopSection from "@/components/TopSection";
 import { Box } from "@mui/material";
 
+//Tutorial page for telling users the process of using the software, from creating an account to applying.
 export default function Tutorial(){
     return(
         <Box className="flex flex-col text-center">

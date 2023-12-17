@@ -13,6 +13,7 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 
+//The menu is used for mobile displays and uses the Sheet ui code, provided by Shadcn, and the NavigationMenu from radix, as well as Link for navigation
 export default function Menu(){
     return(
 <Sheet>

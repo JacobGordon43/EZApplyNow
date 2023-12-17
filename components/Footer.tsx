@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, Typography } from "@mui/material"
-
+//A simple footer component using MUI
 export default function Footer(){
     return(
         <Box className="w-screen bg-black h-16 ">

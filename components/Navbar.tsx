@@ -2,6 +2,7 @@
 
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
+//A navbar that uses Radix to create it's architecture. Additional styling is added for giving it a simple but modern look. Next's Link is used to provide navigation to different pages
 export default function Navbar(){
     return(
         <NavigationMenu.Root className="hidden tablet:flex">

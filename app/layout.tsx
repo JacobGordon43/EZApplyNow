@@ -1,3 +1,4 @@
+import { ReduxProvider } from '@/redux/provider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -14,9 +15,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  //Redux provider surrounds all children elements to provide them global variables
   return (
     <html lang="en">
-      <body className={"bg-white" + inter.className}>{children}</body>
+      <body className={"bg-white" + inter.className}><ReduxProvider>{children}</ReduxProvider></body>
     </html>
   )
 }
