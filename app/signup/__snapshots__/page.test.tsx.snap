@@ -1,0 +1,350 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup page should render 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="flex flex-col bg-[#2DC653] justify-center items-center MuiBox-root css-0"
+        >
+          <nav
+            aria-label="Main"
+            class="hidden tablet:flex"
+            data-orientation="horizontal"
+            dir="ltr"
+          >
+            <div
+              style="position: relative;"
+            >
+              <ul
+                class="flex flex-row"
+                data-orientation="horizontal"
+                dir="ltr"
+              >
+                <li
+                  class="mx-2 px-2 py-1"
+                >
+                  <a
+                    href="/"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li
+                  class="mx-2 px-2 py-1"
+                >
+                  <a
+                    href="/tutorial"
+                  >
+                    Tutorial
+                  </a>
+                </li>
+                <li
+                  class="mx-2 px-2 py-1"
+                >
+                  <a
+                    href="/login"
+                  >
+                    Login
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div
+            class="flex flex-row-reverse w-screen MuiBox-root css-0"
+          >
+            <button
+              aria-controls="radix-:r4:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="tablet:hidden grid h-10 m-3"
+              data-state="closed"
+              type="button"
+            >
+              <div
+                class="bg-black w-12 h-1"
+              />
+              <div
+                class="bg-black w-12 h-1"
+              />
+              <div
+                class="bg-black w-12 h-1"
+              />
+            </button>
+          </div>
+          <div
+            class="flex items-center h-64 text-center self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center text-6xl tablet:text-8xl desktop:text-9xl css-1jr6t5h-MuiTypography-root"
+            >
+              CREATE AN ACCOUNT
+            </p>
+          </div>
+        </div>
+        <form
+          class="mt-4 w-11/12 m-auto tablet:w-96"
+        >
+          <div
+            class="flex flex-col"
+          >
+            <label>
+              Email
+            </label>
+            <input
+              class="p-1 border-[#eee] border-2 shadow-sm"
+              placeholder="example@gmail.com"
+              type="text"
+            />
+          </div>
+          <div
+            class="flex flex-col"
+          >
+            <label>
+              Password
+            </label>
+            <input
+              class="p-1 border-[#eee] border-2 shadow-sm"
+              placeholder="********"
+              type="Password"
+            />
+          </div>
+          <div
+            class="flex flex-col"
+          >
+            <label>
+              Confirm Password
+            </label>
+            <input
+              class="p-1 border-[#eee] border-2 shadow-sm"
+              placeholder="********"
+              type="Password"
+            />
+          </div>
+          <div
+            class="flex flex-col mt-3 tablet:flex-row justify-between MuiBox-root css-0"
+          >
+            <button
+              class="p-2 bg-[#eee] px-3"
+            >
+              Sign Up
+            </button>
+            <p
+              class="MuiTypography-root MuiTypography-body1 self-center css-ahj2mt-MuiTypography-root"
+            >
+              Already have an account? Login 
+              <a
+                class="text-purple-900 underline"
+                href="/login"
+              >
+                here
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiBox-root css-0"
+    >
+      <div
+        class="flex flex-col bg-[#2DC653] justify-center items-center MuiBox-root css-0"
+      >
+        <nav
+          aria-label="Main"
+          class="hidden tablet:flex"
+          data-orientation="horizontal"
+          dir="ltr"
+        >
+          <div
+            style="position: relative;"
+          >
+            <ul
+              class="flex flex-row"
+              data-orientation="horizontal"
+              dir="ltr"
+            >
+              <li
+                class="mx-2 px-2 py-1"
+              >
+                <a
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="mx-2 px-2 py-1"
+              >
+                <a
+                  href="/tutorial"
+                >
+                  Tutorial
+                </a>
+              </li>
+              <li
+                class="mx-2 px-2 py-1"
+              >
+                <a
+                  href="/login"
+                >
+                  Login
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div
+          class="flex flex-row-reverse w-screen MuiBox-root css-0"
+        >
+          <button
+            aria-controls="radix-:r4:"
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            class="tablet:hidden grid h-10 m-3"
+            data-state="closed"
+            type="button"
+          >
+            <div
+              class="bg-black w-12 h-1"
+            />
+            <div
+              class="bg-black w-12 h-1"
+            />
+            <div
+              class="bg-black w-12 h-1"
+            />
+          </button>
+        </div>
+        <div
+          class="flex items-center h-64 text-center self-center MuiBox-root css-0"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 text-center text-6xl tablet:text-8xl desktop:text-9xl css-1jr6t5h-MuiTypography-root"
+          >
+            CREATE AN ACCOUNT
+          </p>
+        </div>
+      </div>
+      <form
+        class="mt-4 w-11/12 m-auto tablet:w-96"
+      >
+        <div
+          class="flex flex-col"
+        >
+          <label>
+            Email
+          </label>
+          <input
+            class="p-1 border-[#eee] border-2 shadow-sm"
+            placeholder="example@gmail.com"
+            type="text"
+          />
+        </div>
+        <div
+          class="flex flex-col"
+        >
+          <label>
+            Password
+          </label>
+          <input
+            class="p-1 border-[#eee] border-2 shadow-sm"
+            placeholder="********"
+            type="Password"
+          />
+        </div>
+        <div
+          class="flex flex-col"
+        >
+          <label>
+            Confirm Password
+          </label>
+          <input
+            class="p-1 border-[#eee] border-2 shadow-sm"
+            placeholder="********"
+            type="Password"
+          />
+        </div>
+        <div
+          class="flex flex-col mt-3 tablet:flex-row justify-between MuiBox-root css-0"
+        >
+          <button
+            class="p-2 bg-[#eee] px-3"
+          >
+            Sign Up
+          </button>
+          <p
+            class="MuiTypography-root MuiTypography-body1 self-center css-ahj2mt-MuiTypography-root"
+          >
+            Already have an account? Login 
+            <a
+              class="text-purple-900 underline"
+              href="/login"
+            >
+              here
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

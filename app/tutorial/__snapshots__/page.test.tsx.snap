@@ -1,0 +1,554 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tutorial page should render 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="flex flex-col text-center MuiBox-root css-0"
+      >
+        <div
+          class="flex flex-col bg-[#2DC653] justify-center items-center MuiBox-root css-0"
+        >
+          <nav
+            aria-label="Main"
+            class="hidden tablet:flex"
+            data-orientation="horizontal"
+            dir="ltr"
+          >
+            <div
+              style="position: relative;"
+            >
+              <ul
+                class="flex flex-row"
+                data-orientation="horizontal"
+                dir="ltr"
+              >
+                <li
+                  class="mx-2 px-2 py-1"
+                >
+                  <a
+                    href="/"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li
+                  class="mx-2 px-2 py-1"
+                >
+                  <a
+                    href="/tutorial"
+                  >
+                    Tutorial
+                  </a>
+                </li>
+                <li
+                  class="mx-2 px-2 py-1"
+                >
+                  <a
+                    href="/login"
+                  >
+                    Login
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div
+            class="flex flex-row-reverse w-screen MuiBox-root css-0"
+          >
+            <button
+              aria-controls="radix-:r4:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="tablet:hidden grid h-10 m-3"
+              data-state="closed"
+              type="button"
+            >
+              <div
+                class="bg-black w-12 h-1"
+              />
+              <div
+                class="bg-black w-12 h-1"
+              />
+              <div
+                class="bg-black w-12 h-1"
+              />
+            </button>
+          </div>
+          <div
+            class="flex items-center h-64 text-center self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center text-6xl tablet:text-8xl desktop:text-9xl css-1jr6t5h-MuiTypography-root"
+            >
+              TUTORIAL
+            </p>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-0"
+        >
+          <div
+            class="tablet:my-14 flex flex-col max-w-[300px] tablet:flex-row tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 MuiBox-root css-0"
+          >
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+              >
+                Create an Account
+              </p>
+            </div>
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+              >
+                The first start to creating a qucker and easier job applicaiton experience is to create an account with us!
+              </p>
+            </div>
+          </div>
+          <div
+            class="tablet:my-14 flex flex-col max-w-[300px] tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 tablet:flex-row-reverse MuiBox-root css-0"
+          >
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+              >
+                Fill Out Your Information
+              </p>
+            </div>
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+              >
+                Once you've made an account, you fill out your job application, including your personal info, work history, education, and so on.
+              </p>
+            </div>
+          </div>
+          <div
+            class="tablet:my-14 flex flex-col max-w-[300px] tablet:flex-row tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 MuiBox-root css-0"
+          >
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+              >
+                Download the Desktop App
+              </p>
+            </div>
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+              >
+                You'll need to download our desktop application and sign in.
+              </p>
+            </div>
+          </div>
+          <div
+            class="tablet:my-14 flex flex-col max-w-[300px] tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 tablet:flex-row-reverse MuiBox-root css-0"
+          >
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+              >
+                Specify Job Related Information
+              </p>
+            </div>
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+              >
+                Upload job specific details that you might need to on the desktop application, including if you've worked for them and so on.
+              </p>
+            </div>
+          </div>
+          <div
+            class="my-4 tablet:my-14 flex flex-col max-w-[300px] tablet:flex-row tablet:max-w-[600px] desktop:max-w-[900px] mx-auto mt-10 MuiBox-root css-0"
+          >
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+              >
+                Get to Applying
+              </p>
+            </div>
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+              >
+                Finally, let it all pay off by putting in a link to an application and let out software do the rest for you!    It'll pause if it runs into unexpected inputs and/or can't submit a job application successfully for whatever reason. But otherwise, just sit back and relax!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-0"
+        >
+          <div
+            class="my-4 tablet:my-14 flex flex-col max-w-[300px] tablet:max-w-[600px] desktop:max-w-[900px] mx-auto tablet:flex-col mb-4 MuiBox-root css-0"
+          >
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] mb- text-4xl css-knj667-MuiTypography-root"
+              >
+                Get Started
+              </p>
+            </div>
+            <div
+              class="self-center MuiBox-root css-0"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+              >
+                Why repeat submitting the same information time after time again? Put in your job application information once,    and let EZApply do the rest of the work! So let us help you get your next job!
+              </p>
+            </div>
+          </div>
+          <a
+            href="/signup"
+          >
+            <button
+              class="p-2 bg-[#EEEEEE] mx-auto mb-3"
+            >
+              Create an Account
+            </button>
+          </a>
+        </div>
+        <div
+          class="w-screen bg-black h-16  MuiBox-root css-0"
+        >
+          <div
+            class="flex w-full h-full justify-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 m-auto css-1nz0j08-MuiTypography-root"
+            >
+              © 2023 EZApply. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-col text-center MuiBox-root css-0"
+    >
+      <div
+        class="flex flex-col bg-[#2DC653] justify-center items-center MuiBox-root css-0"
+      >
+        <nav
+          aria-label="Main"
+          class="hidden tablet:flex"
+          data-orientation="horizontal"
+          dir="ltr"
+        >
+          <div
+            style="position: relative;"
+          >
+            <ul
+              class="flex flex-row"
+              data-orientation="horizontal"
+              dir="ltr"
+            >
+              <li
+                class="mx-2 px-2 py-1"
+              >
+                <a
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="mx-2 px-2 py-1"
+              >
+                <a
+                  href="/tutorial"
+                >
+                  Tutorial
+                </a>
+              </li>
+              <li
+                class="mx-2 px-2 py-1"
+              >
+                <a
+                  href="/login"
+                >
+                  Login
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div
+          class="flex flex-row-reverse w-screen MuiBox-root css-0"
+        >
+          <button
+            aria-controls="radix-:r4:"
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            class="tablet:hidden grid h-10 m-3"
+            data-state="closed"
+            type="button"
+          >
+            <div
+              class="bg-black w-12 h-1"
+            />
+            <div
+              class="bg-black w-12 h-1"
+            />
+            <div
+              class="bg-black w-12 h-1"
+            />
+          </button>
+        </div>
+        <div
+          class="flex items-center h-64 text-center self-center MuiBox-root css-0"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 text-center text-6xl tablet:text-8xl desktop:text-9xl css-1jr6t5h-MuiTypography-root"
+          >
+            TUTORIAL
+          </p>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="tablet:my-14 flex flex-col max-w-[300px] tablet:flex-row tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 MuiBox-root css-0"
+        >
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+            >
+              Create an Account
+            </p>
+          </div>
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+            >
+              The first start to creating a qucker and easier job applicaiton experience is to create an account with us!
+            </p>
+          </div>
+        </div>
+        <div
+          class="tablet:my-14 flex flex-col max-w-[300px] tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 tablet:flex-row-reverse MuiBox-root css-0"
+        >
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+            >
+              Fill Out Your Information
+            </p>
+          </div>
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+            >
+              Once you've made an account, you fill out your job application, including your personal info, work history, education, and so on.
+            </p>
+          </div>
+        </div>
+        <div
+          class="tablet:my-14 flex flex-col max-w-[300px] tablet:flex-row tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 MuiBox-root css-0"
+        >
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+            >
+              Download the Desktop App
+            </p>
+          </div>
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+            >
+              You'll need to download our desktop application and sign in.
+            </p>
+          </div>
+        </div>
+        <div
+          class="tablet:my-14 flex flex-col max-w-[300px] tablet:max-w-[600px] desktop:max-w-[900px] mx-auto my-10 tablet:flex-row-reverse MuiBox-root css-0"
+        >
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+            >
+              Specify Job Related Information
+            </p>
+          </div>
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+            >
+              Upload job specific details that you might need to on the desktop application, including if you've worked for them and so on.
+            </p>
+          </div>
+        </div>
+        <div
+          class="my-4 tablet:my-14 flex flex-col max-w-[300px] tablet:flex-row tablet:max-w-[600px] desktop:max-w-[900px] mx-auto mt-10 MuiBox-root css-0"
+        >
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] text-3xl css-knj667-MuiTypography-root"
+            >
+              Get to Applying
+            </p>
+          </div>
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+            >
+              Finally, let it all pay off by putting in a link to an application and let out software do the rest for you!    It'll pause if it runs into unexpected inputs and/or can't submit a job application successfully for whatever reason. But otherwise, just sit back and relax!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="my-4 tablet:my-14 flex flex-col max-w-[300px] tablet:max-w-[600px] desktop:max-w-[900px] mx-auto tablet:flex-col mb-4 MuiBox-root css-0"
+        >
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 tablet:w-[200px] desktop:w-[300px] mb- text-4xl css-knj667-MuiTypography-root"
+            >
+              Get Started
+            </p>
+          </div>
+          <div
+            class="self-center MuiBox-root css-0"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 text-center tablet:min-w-[400px] css-1a6x7ea-MuiTypography-root"
+            >
+              Why repeat submitting the same information time after time again? Put in your job application information once,    and let EZApply do the rest of the work! So let us help you get your next job!
+            </p>
+          </div>
+        </div>
+        <a
+          href="/signup"
+        >
+          <button
+            class="p-2 bg-[#EEEEEE] mx-auto mb-3"
+          >
+            Create an Account
+          </button>
+        </a>
+      </div>
+      <div
+        class="w-screen bg-black h-16  MuiBox-root css-0"
+      >
+        <div
+          class="flex w-full h-full justify-center MuiBox-root css-0"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 m-auto css-1nz0j08-MuiTypography-root"
+          >
+            © 2023 EZApply. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

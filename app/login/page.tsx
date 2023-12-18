@@ -73,7 +73,7 @@ export default function Login(){
             //     dispatch(setErrors(errorMessages))
             // }
         // }else{
-        //     dispatch(setErrors(errorMessages))
+            dispatch(setErrors(errorMessages))
         // }
         
         dispatch(login(email));
