@@ -2,7 +2,7 @@
 import Link from "next/link";
 import {login, logout} from "../../redux/features/authSlice"
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, setErrors, errorFormat } from "@/redux/features/loginErrorSlice";
+import { clearErrors, setErrors, errorFormat, errorMessages } from "@/redux/features/loginErrorSlice";
 import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
 import { validateEmail, validatePassword } from "@/server-actions/validation";
@@ -16,12 +16,15 @@ export default function LoginForm(){
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [loginError, setLoginError] = useState(false)
+    const [loginErrorMessage, setLoginErrorMessage] = useState("There was an issue logging in.")
     const errors = useAppSelector((state)=>state.errorMessagesReducer.value.errors);
 
     useEffect(()=>{
         setEmailError(false);
         setPasswordError(false);
-        errors.map((error)=>{
+        setLoginError(false);
+        errors.map((error: { input: string, message : string })=>{
             if(error.input == "email"){
                 setEmailError(true)
             }
@@ -29,8 +32,13 @@ export default function LoginForm(){
             if(error.input == "password"){
                 setPasswordError(true)
             }
+
+            if(error.input == "login"){
+                setLoginError(true);
+                setLoginErrorMessage(error.message)
+            }
         })    
-    }, [emailError, errors, passwordError])
+    }, [emailError, errors, passwordError, loginError, loginErrorMessage] )
     
     async function loginAccount(e : MouseEvent){
         e.preventDefault();
@@ -65,7 +73,14 @@ export default function LoginForm(){
                       "password": password
                     }
                   })
-            }).then((res)=>console.log(res))
+            }).then((res)=>res.json()).then((data)=>{
+                console.log(data.statusCode);
+                if(data.statusCode == 401){
+                    errorMessages.push({input: "login", message: data.body.message})
+                }else if(data.statusCode == 200){
+                    redirect("/");
+                }
+            })
     
             // if(response.status == 200){
             //     redirect("/account");
@@ -75,6 +90,7 @@ export default function LoginForm(){
             // }
         // }else{
             dispatch(setErrors(errorMessages))
+            console.log(errors);
         // }
         
         dispatch(login(email));
@@ -82,6 +98,8 @@ export default function LoginForm(){
 
     return(
         <form className="mt-4 w-11/12 m-auto tablet:w-96">
+            {loginError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">{loginErrorMessage}</Box>}
+
             <div className="flex flex-col">
                 <label>Email</label>
                 <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
