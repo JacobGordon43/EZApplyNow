@@ -10,4 +10,8 @@ function validatePassword(password : string){
     return res.test(password);
 }
 
-export {validateEmail, validatePassword}
+function validateNotEmpty(string : string){
+    return string.length != 0
+}
+
+export {validateEmail, validatePassword, validateNotEmpty}

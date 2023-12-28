@@ -5,26 +5,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, setErrors, errorFormat, errorMessages } from "@/redux/features/errorSlice";
 import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
-import { validateEmail, validatePassword } from "@/server-actions/validation";
+import { validateEmail, validateNotEmpty, validatePassword } from "@/server-actions/validation";
 import { redirect } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
+import {v4 as uuidv4} from 'uuid';
 
-export default function LoginForm(){
+export default function SignUpForm(){
     const dispatch = useDispatch<AppDispatch>();
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    const [loginError, setLoginError] = useState(false)
-    const [loginErrorMessage, setLoginErrorMessage] = useState("There was an issue logging in.")
+    const [signUpError, setsignUpError] = useState(false)
+    const [signUpErrorMessage, setsignUpErrorMessage] = useState("There was an issue creating your account in.")
+    const [nameError, setNameError] = useState(false)
     const errors = useAppSelector((state)=>state.errorMessagesReducer.value.errors);
 
     useEffect(()=>{
         setEmailError(false);
         setPasswordError(false);
-        setLoginError(false);
+        setsignUpError(false);
+        setNameError(false);
         errors.map((error: { input: string, message : string })=>{
+            if(error.input == "name"){
+                setNameError(true);
+            }
+
             if(error.input == "email"){
                 setEmailError(true)
             }
@@ -33,30 +41,35 @@ export default function LoginForm(){
                 setPasswordError(true)
             }
 
-            if(error.input == "login"){
-                setLoginError(true);
-                setLoginErrorMessage(error.message)
+            if(error.input == "signup"){
+                setsignUpError(true);
+                setsignUpErrorMessage(error.message)
             }
         })    
-    }, [emailError, errors, passwordError, loginError, loginErrorMessage] )
+    }, [emailError, errors, passwordError, signUpError, signUpErrorMessage] )
     
-    async function loginAccount(e : MouseEvent){
+    async function createAccount(e : MouseEvent){
         e.preventDefault();
-        console.log("In login function");
+        console.log("In signup function");
+        //Clearns all previous error messages
         let errorMessages : Array<errorFormat> = [];
     
-    
-        if(!validateEmail(email)){
+        //Checks all the forms to validate if they're in an acceptable format for the API
+       //Otherwise, they are added to the error messages array 
+        if(!validateNotEmpty(name)){
+            errorMessages.push({input:"name", message:"This field must be filled out."})
+        }
+        if(validateEmail(email)){
             errorMessages.push({input:"email", message:"The email provided is not in an email format"})
         }
-        
         if(!validatePassword(password)){
             errorMessages.push({input:"password", message:"Your password must be 8 characters long and include a lowercase, uppercase, special, and numerical character"})
         }
         //currently not working
-        // if(errorMessages.length == 0){
-        //     dispatch(clearErrors())
-           await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/login", {
+        if(errorMessages.length == 0){
+            dispatch(clearErrors())
+            const id = uuidv4();
+           await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/signup", {
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json"
@@ -65,30 +78,33 @@ export default function LoginForm(){
                     "headers": {
                       "Content-Type": "application/json"
                     },
-                    "domainName": "localhost.com/login",
+                    "domainName": "localhost.com/signup",
                     "domainPrefix": "localhost",
                     "time": new Date(),
                     "body": {
+                      "name": name,
+                      "uuid": id,
                       "email": email,
                       "password": password
                     }
                   })
             }).then((res)=>res.json()).then((data)=>{
-                console.log(data.statusCode);
+                console.log(data);
                 if(data.statusCode == 401){
-                    errorMessages.push({input: "login", message: data.body.message})
+                    errorMessages.push({input: "signup", message: data.body.message})
                 }else if(data.statusCode == 200){
                     redirect("/");
                 }
             })
-    
+        }
             // if(response.status == 200){
             //     redirect("/account");
             // }else if(response.status==401){
             //     errorMessages.push({input:"page", message:"Incorrect credentials. Try again or create an account."})
             //     dispatch(setErrors(errorMessages))
             // }
-        // }else{
+        // }
+        // else{
             dispatch(setErrors(errorMessages))
             console.log(errors);
         // }
@@ -98,8 +114,11 @@ export default function LoginForm(){
 
     return(
         <form className="mt-4 w-11/12 m-auto tablet:w-96">
-            {loginError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">{loginErrorMessage}</Box>}
-
+            <div className="flex flex-col">
+                <label>First Name</label>
+                <input type="text" placeholder="John" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setName(e.target.value)}/>
+                {nameError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">Your name can not be empty. Please enter your name to proceed.</Box>}
+            </div> 
             <div className="flex flex-col">
                 <label>Email</label>
                 <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
@@ -113,7 +132,7 @@ export default function LoginForm(){
                 {passwordError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">Your password must be 8 characters long and include a lowercase, uppercase, special, and numerical character</Box>}
             </div> 
             <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
-                <Button text="Login" className="px-3" onClick={(e)=> loginAccount(e)}/>
+                <Button text="Login" className="px-3" onClick={(e)=> createAccount(e)}/>
                 <Typography className="self-center">No Account? No problem, sign up <Link href={"/signup"} className="text-purple-900 underline">here</Link></Typography>
             </Box>
         </form>

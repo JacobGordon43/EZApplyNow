@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import {login, logout} from "../../redux/features/authSlice"
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, setErrors, errorFormat } from "@/redux/features/loginErrorSlice";
+import { clearErrors, setErrors, errorFormat } from "@/redux/features/errorSlice";
 import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
 import { validateEmail, validatePassword } from "@/server-actions/validation";

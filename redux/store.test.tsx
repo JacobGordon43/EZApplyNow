@@ -1,5 +1,5 @@
 import { store } from "@/redux/store";
-import { setErrors } from "./features/loginErrorSlice";
+import { setErrors } from "./features/errorSlice";
 import {describe, expect, test, it} from '@jest/globals';
 
 describe('Store', () => {

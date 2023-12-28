@@ -5,7 +5,7 @@ import {describe, expect, test, it} from '@jest/globals';
 import Login from "./page";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
-import { setErrors } from "@/redux/features/loginErrorSlice";
+import { setErrors } from "@/redux/features/errorSlice";
 describe('Login page', () => {
     it("should render", ()=>{
         const container = render(
