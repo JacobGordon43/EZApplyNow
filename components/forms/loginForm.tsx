@@ -74,7 +74,7 @@ export default function LoginForm(){
                     }
                   })
             }).then((res)=>res.json()).then((data)=>{
-                console.log(data.statusCode);
+                console.log(data);
                 if(data.statusCode == 401){
                     errorMessages.push({input: "login", message: data.body.message})
                 }else if(data.statusCode == 200){
