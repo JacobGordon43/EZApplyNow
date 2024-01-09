@@ -102,13 +102,41 @@ export default function LoginForm(){
     return(
         <form className="mt-4 w-11/12 m-auto tablet:w-96">
             {loginError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">{loginErrorMessage}</Box>}
-
             <div className="flex flex-col">
-                <label>Email</label>
+                <label>First Name</label>
                 <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div> 
-
+            <div className="flex flex-col">
+                <label>Last Name</label>
+                <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
+                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+            </div> 
+            <div className="flex flex-col">
+                <label>Home Address</label>
+                <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
+                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+            </div>
+            <div className="flex flex-col">
+                <label>State</label>
+                <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
+                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+            </div>  
+            <div className="flex flex-col">
+                <label>County</label>
+                <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
+                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+            </div> 
+            <div className="flex flex-col">
+                <label>Zipcode</label>
+                <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
+                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+            </div>
+            <div className="flex flex-col">
+                <label>Phone Number</label>
+                <input type="text" placeholder="example@gmail.com" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEmail(e.target.value)}/>
+                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+            </div>
             {/* {errors[0]?.input=="email" && <Box>{errors[0].message}</Box>} */}
             <div className="flex flex-col">
                 <label>Password</label>
@@ -117,7 +145,6 @@ export default function LoginForm(){
             </div> 
             <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
                 <Button text="Login" className="px-3" onClick={(e)=> loginAccount(e)}/>
-                <Typography className="self-center">No Account? No problem, sign up <Link href={"/signup"} className="text-purple-900 underline">here</Link></Typography>
             </Box>
         </form>
     )

@@ -7,14 +7,16 @@ type InitialState = {
 type AuthState = {
     isAuth: boolean;
     email: string,
-    uid: string
+    uid: string,
+    name: string
 }
 //Creates the initial state using the InitialState type as its type
 const initialState = {
     value: {
         isAuth: false,
         email: "",
-        uid: ""
+        uid: "",
+        name: ""
     } as AuthState
 } as InitialState
 //Creates a new slice, giving it a name and the intial state, as well as reducers to provide login and logout capabilities.
@@ -23,18 +25,23 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logout: ()=>{
+            localStorage.clear();
             return initialState;
         },
-        login: (state, action: PayloadAction<string>) =>{
+        login: (state, action: PayloadAction<{email: string, uid: string, name:string}>) =>{
+            localStorage.setItem("email", action.payload.email);
+            localStorage.setItem("name", action.payload.name);
+            localStorage.setItem("userId", action.payload.uid);
+
             return{
                 value:{
                     isAuth: true,
-                    email: action.payload,
-                    uid: action.payload
+                    email: action.payload.email,
+                    uid: action.payload.uid,
+                    name: action.payload.name
                 }
             }
-        }
-
+        },
     }
 })
 

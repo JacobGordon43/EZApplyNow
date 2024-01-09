@@ -20,7 +20,8 @@ export default function TopSection({title, className, titleClassName} : TopSecti
             <Menu />
           </Box>
           <Box className="flex items-center h-64 text-center self-center">
-            <Typography className={cn("text-center text-6xl tablet:text-8xl desktop:text-9xl", titleClassName)} fontFamily={"League Gothic"} fontWeight={"900"}>{title.toUpperCase()}</Typography>
+            {/* <Typography className={cn("text-center text-6xl tablet:text-8xl desktop:text-9xl", titleClassName)} fontFamily={"League Gothic"} fontWeight={"900"}>{title.toUpperCase()}</Typography> */}
+            <div className={cn("text-center font-['League_Gothic'] text-6xl tablet:text-8xl desktop:text-9xl", titleClassName)}>{title.toUpperCase()}</div>
           </Box>
       </Box>
     )

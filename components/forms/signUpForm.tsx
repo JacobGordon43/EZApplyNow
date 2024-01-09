@@ -59,7 +59,7 @@ export default function SignUpForm(){
         if(!validateNotEmpty(name)){
             errorMessages.push({input:"name", message:"This field must be filled out."})
         }
-        if(validateEmail(email)){
+        if(!validateEmail(email)){
             errorMessages.push({input:"email", message:"The email provided is not in an email format"})
         }
         if(!validatePassword(password)){
@@ -69,33 +69,38 @@ export default function SignUpForm(){
         if(errorMessages.length == 0){
             dispatch(clearErrors())
             const id = uuidv4();
-           await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/signup", {
+            await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/signup", {
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     "headers": {
-                      "Content-Type": "application/json"
+                        "Content-Type": "application/json"
                     },
                     "domainName": "localhost.com/signup",
                     "domainPrefix": "localhost",
                     "time": new Date(),
-                    "body": {
-                      "name": name,
-                      "uuid": id,
-                      "email": email,
-                      "password": password
+                    "body": JSON.stringify({
+                        "name": name,
+                        "uuid": id,
+                        "email": email,
+                        "password": password
+                    }),
+                    
+                    })
+                }).then((res)=>res.json()).then((data)=>{
+                    //data = JSON.parse(data.body);
+                    console.log(data);
+                    console.log(data.statusCode);
+                    if(data.statusCode == 200){
+                        redirect("/")
+                    }else{
+                        errorMessages.push({input: "signup", message: "There was an issue with the server. Please try again later."})
                     }
-                  })
-            }).then((res)=>res.json()).then((data)=>{
-                console.log(data);
-                if(data.statusCode == 401){
-                    errorMessages.push({input: "signup", message: data.body.message})
-                }else if(data.statusCode == 200){
-                    redirect("/");
-                }
-            })
+                })
+            
+           
         }
             // if(response.status == 200){
             //     redirect("/account");
@@ -109,11 +114,13 @@ export default function SignUpForm(){
             console.log(errors);
         // }
         
-        dispatch(login(email));
+        //dispatch(login(email));
     }
 
     return(
         <form className="mt-4 w-11/12 m-auto tablet:w-96">
+            {signUpError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">{signUpErrorMessage}</Box>}
+
             <div className="flex flex-col">
                 <label>First Name</label>
                 <input type="text" placeholder="John" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setName(e.target.value)}/>
@@ -133,7 +140,7 @@ export default function SignUpForm(){
             </div> 
             <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
                 <Button text="Login" className="px-3" onClick={(e)=> createAccount(e)}/>
-                <Typography className="self-center">No Account? No problem, sign up <Link href={"/signup"} className="text-purple-900 underline">here</Link></Typography>
+                <Typography className="self-center">Already have an account? Login <Link href={"/login"} className="text-purple-900 underline">here</Link></Typography>
             </Box>
         </form>
     )
