@@ -14,4 +14,9 @@ function validateNotEmpty(string : string){
     return string.length != 0
 }
 
-export {validateEmail, validatePassword, validateNotEmpty}
+function validateDate(string : string){
+    let res = /^(0 | 1)[1-9]\/(19|20)[\d]{2,2}$/
+    res.test(string);
+}
+
+export {validateEmail, validatePassword, validateDate, validateNotEmpty}

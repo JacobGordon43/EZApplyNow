@@ -10,13 +10,15 @@ import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 //import router from "next/router"
 import { useRouter } from "next/navigation";
-
-export default function LoginForm(){
+interface LoginForm {
+    btn : React.ReactNode
+}
+export default function LoginForm({btn} : LoginForm){
     const dispatch = useDispatch<AppDispatch>();
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [address, setAddress] = useState("");
-    const [state, setState] = useState("");
+    const [schoolName, setSchoolName] = useState("");
+    const [GPA, setGPA] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [startDate, setStartDate] = useState("");
     const [county, setCounty] = useState("");
     const [Zipcode, setZipcode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -110,48 +112,41 @@ export default function LoginForm(){
         <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
             {loginError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">{loginErrorMessage}</Box>}
             <div className="flex flex-col">
-                <label>First Name</label>
-                <input type="text" placeholder="John" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setFirstName(e.target.value)}/>
+                <label>School Name</label>
+                <input type="text" placeholder="Example State University" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSchoolName(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div> 
             <div className="flex flex-col">
-                <label>Last Name</label>
-                <input type="text" placeholder="Doe" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setLastName(e.target.value)}/>
+                <label>GPA</label>
+                <input type="text" placeholder="0.00" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setGPA(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div> 
             <div className="flex flex-col">
-                <label>Home Address</label>
-                <input type="text" placeholder="1234 Example Ave" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setAddress(e.target.value)}/>
+                <label>Start Date</label>
+                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setStartDate(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div>
             <div className="flex flex-col">
-                <label>State</label>
-                <input type="text" placeholder="Arizona" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setState(e.target.value)}/>
+                <label>Graduation (Actual or Expected)</label>
+                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEndDate(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div>  
             <div className="flex flex-col">
-                <label>County</label>
-                <input type="text" placeholder="Maricopa" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setCounty(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
-            </div> 
-            <div className="flex flex-col">
-                <label>Zipcode</label>
-                <input type="text" placeholder="12345" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setZipcode(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>Degree Type</label>
+                <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEndDate(e.target.value)}>
+                    <option>Bachelor</option>
+                    <option>Master's</option>
+                    <option>Certification</option>
+                </select>
             </div>
             <div className="flex flex-col">
-                <label>Phone Number</label>
-                <input type="text" placeholder="123-456-7890" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setPhoneNumber(e.target.value)}/>
+                <label>Field of Study</label>
+                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setPhoneNumber(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div>
-            {/* {errors[0]?.input=="email" && <Box>{errors[0].message}</Box>} */}
-            <div className="flex flex-col">
-                <label>Phone Number Type</label>
-                <input type="Mobile" placeholder="********" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setPhoneNumberType(e.target.value)}/>
-                {passwordError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">Your password must be 8 characters long and include a lowercase, uppercase, special, and numerical character</Box>}
-            </div> 
-            <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
-                <Button text="Save" className="px-3" onClick={(e)=> console.log('clicked')}/>
+            <Box className="flex flex-col mt-3 tablet:flex-row">
+                <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e)=> console.log('clicked')}/>
+                {btn}
             </Box>
         </form>
     )

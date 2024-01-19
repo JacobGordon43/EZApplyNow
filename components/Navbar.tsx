@@ -36,7 +36,10 @@ export default function Navbar(){
                                     <DropdownMenu.Content className="min-w-[150px] bg-white rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
           sideOffset={5}>
                                         <DropdownMenu.Item className="p-2 hover:bg-[#EEE] hover:rounded-t-md">
-                                            <Link href={"/account"} className="w-full">Profile</Link>
+                                            <Link href={"/account"} className="w-full">
+                                                <div className="w-full text-center">
+                                                Profile
+                                                </div></Link>
                                         </DropdownMenu.Item>
                                         <DropdownMenu.Item className="p-2 hover:bg-[#EEE] hover:rounded-b-md">
                                             <button className="w-full" onClick={(e)=>{

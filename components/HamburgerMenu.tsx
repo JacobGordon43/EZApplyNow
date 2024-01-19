@@ -24,7 +24,7 @@ export default function Menu(){
   </SheetTrigger>
   <SheetContent>
     <SheetHeader>
-      <SheetTitle>
+      <SheetTitle className="py-3 bg-[#2DC653]">
         <Typography fontFamily={"League Gothic"}>EZApply</Typography>
       </SheetTitle>
       <SheetDescription>

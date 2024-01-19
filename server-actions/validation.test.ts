@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from "./validation";
+import { validateDate, validateEmail, validatePassword } from "./validation";
 import {describe, expect, test} from '@jest/globals';
 //Testing email validation
 test("example@gmail.com is a valid email", ()=>{
@@ -40,4 +40,8 @@ test("Password is not a valid password", ()=>{
 
 test("12345 is not a valid password", ()=>{
     expect(validatePassword("12345")).toBe(false)
+})
+
+test("2020 is a valid year", ()=>{
+    expect(validateDate("2020"))
 })
