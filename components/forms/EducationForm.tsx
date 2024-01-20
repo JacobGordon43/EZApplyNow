@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 import Link from "next/link";
 import {login, logout} from "../../redux/features/authSlice"
@@ -19,18 +20,14 @@ export default function LoginForm({btn} : LoginForm){
     const [GPA, setGPA] = useState("");
     const [endDate, setEndDate] = useState("");
     const [startDate, setStartDate] = useState("");
-    const [county, setCounty] = useState("");
-    const [Zipcode, setZipcode] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [phoneNumberType, setPhoneNumberType] = useState("");
+    const [degree, setDegree] = useState("");
+    const [fieldOfStudy, setFieldOfStudy] = useState("");
     //const [statusCode, setStatusCode] = useState(0);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [loginError, setLoginError] = useState(false)
     const [loginErrorMessage, setLoginErrorMessage] = useState("There was an issue logging in.")
     const errors = useAppSelector((state)=>state.errorMessagesReducer.value.errors);
-    const router = useRouter();
-    //dispatch(clearErrors())
 
     useEffect(()=>{
         setEmailError(false);
@@ -133,7 +130,7 @@ export default function LoginForm({btn} : LoginForm){
             </div>  
             <div className="flex flex-col">
                 <label>Degree Type</label>
-                <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEndDate(e.target.value)}>
+                <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setDegree(e.target.value)}>
                     <option>Bachelor</option>
                     <option>Master's</option>
                     <option>Certification</option>
@@ -141,7 +138,7 @@ export default function LoginForm({btn} : LoginForm){
             </div>
             <div className="flex flex-col">
                 <label>Field of Study</label>
-                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setPhoneNumber(e.target.value)}/>
+                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setFieldOfStudy(e.target.value)}/>
                 {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
             </div>
             <Box className="flex flex-col mt-3 tablet:flex-row">

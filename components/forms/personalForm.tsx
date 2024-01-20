@@ -151,7 +151,7 @@ export default function LoginForm(){
                 {passwordError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">Your password must be 8 characters long and include a lowercase, uppercase, special, and numerical character</Box>}
             </div> 
             <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
-                <Button text="Save" className="px-3" onClick={(e)=> console.log('clicked')}/>
+                <Button text="Save" className="px-3 bg-[#2DC653]" onClick={(e)=> console.log('clicked')}/>
             </Box>
         </form>
     )

@@ -4,15 +4,29 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 type InitialState = {
     value: EducationState;
 }
+export type educationFormat = {
+    key: number,
+    values: educationFormFormat
+}
+
+export type educationFormFormat = {
+    schoolName : string,
+    GPA : string,
+    endDate : string,
+    startDate : string,
+    degree : string,
+    field : string
+}
+
 //Creates a new type for the state of the auth slice
 type EducationState = {
-    forms: Array<React.ReactNode>;
+    forms: Array<educationFormat>;
 }
 //Creates the initial state using the InitialState type as its type
 const initialState = {
     value: {
         forms: []
-    } as EducationState
+    } as unknown as EducationState
 } as InitialState
 //Creates a new slice, giving it a name and the intial state, as well as reducers to provide login and logout capabilities.
 export const education = createSlice({
@@ -27,11 +41,11 @@ export const education = createSlice({
         //         }
         //     }
         // },
-        setForms: (state, action: PayloadAction<{forms: Array<React.ReactNode>}>) =>{
+        setForms: (state, action: PayloadAction<Array<educationFormat>>) =>{
 
             return{
                 value:{
-                    forms: action.payload.forms
+                    forms: action.payload
                 }
             }
         },

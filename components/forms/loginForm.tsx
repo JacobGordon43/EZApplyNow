@@ -70,7 +70,7 @@ export default function LoginForm(){
                 "domainPrefix": "localhost",
                 "time": new Date(),
                 "body": {
-                    "email": email,
+                    "email": email.toLowerCase(),
                     "password": password
                 }
                 })

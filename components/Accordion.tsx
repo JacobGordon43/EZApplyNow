@@ -3,7 +3,10 @@ import * as Accordion from '@radix-ui/react-accordion';
 import PersonalForm from "@/components/forms/personalForm"
 import { ChevronDownIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation"
+import Button from "./Button";
 interface DropDownProps{
     children : React.ReactNode | React.ReactNode[],
     text : string,
@@ -11,6 +14,10 @@ interface DropDownProps{
 }
 
 export default function FormDropdown({children, text, value} : DropDownProps){
+    const router = useRouter();
+    if(localStorage.length === 0){
+        router.push("/");
+    }
     return(
         <Accordion.Root type='single' collapsible className={cn("w-11/12 max-w-[800px] m-auto")}>
             <Accordion.Item value={value}>

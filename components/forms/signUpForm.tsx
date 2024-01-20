@@ -84,7 +84,7 @@ export default function SignUpForm(){
                     "body": JSON.stringify({
                         "name": name,
                         "uuid": id,
-                        "email": email,
+                        "email": email.toLowerCase(),
                         "password": password
                     }),
                     
