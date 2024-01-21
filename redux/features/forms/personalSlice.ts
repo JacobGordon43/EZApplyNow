@@ -5,27 +5,29 @@ type InitialState = {
     value: EducationState;
 }
 export type educationFormat = {
-    key: number,
-    values: educationFormFormat
+    key: string,
+    values: personalFormFormat
 }
 
-export type educationFormFormat = {
-    schoolName : string,
-    GPA : string,
-    endDate : string,
-    startDate : string,
-    degree : string,
-    field : string
+export type personalFormFormat = {
+    firstName : string,
+    lastName : string,
+    address : string,
+    state : string,
+    county : string,
+    zipcode : string,
+    phoneNumber : string,
+    phoneNumberType : string
 }
 
 //Creates a new type for the state of the auth slice
 type EducationState = {
-    forms: Array<educationFormat>;
+    form: personalFormFormat
 }
 //Creates the initial state using the InitialState type as its type
 const initialState = {
     value: {
-        forms: []
+        form: []
     } as unknown as EducationState
 } as InitialState
 //Creates a new slice, giving it a name and the intial state, as well as reducers to provide login and logout capabilities.
@@ -41,11 +43,11 @@ export const education = createSlice({
         //         }
         //     }
         // },
-        setForms: (state, action: PayloadAction<Array<educationFormat>>) =>{
+        setForms: (state, action: PayloadAction<personalFormFormat>) =>{
 
             return{
                 value:{
-                    forms: action.payload
+                    form: action.payload
                 }
             }
         },

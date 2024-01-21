@@ -3,26 +3,20 @@ import Button from "../Button"
 import EducationForm from "./EducationForm"
 import { useDispatch } from "react-redux"
 import { useAppSelector, AppDispatch } from "@/redux/store";
-import { educationFormat, setForms } from "@/redux/features/educationSlice";
+import { educationFormat, setForms } from "@/redux/features/forms/educationSlice";
+import {v4 as uuidv4} from 'uuid';
+
 export default function EducationContainer(){
     //let forms : React.ReactNode[] = [<EducationForm />
     const selectorForms = useAppSelector((state) => state.educationReducer.value.forms)
     const [localForms, setLocalForms] = useState(Array<React.ReactNode>)
     const dispatch = useDispatch<AppDispatch>();
 
-    const deleteForm = (e : MouseEvent, key : number)=> {
+    const deleteForm = (e : MouseEvent, key : string)=> {
         e.preventDefault();
         let arr = selectorForms;
         arr = arr.filter(item => item.key !== key)
         dispatch(setForms(arr));
-        // selectorForms.forEach((form)=>{
-        //     let i = 0;
-        //     if(form.key === key){
-        //        selectorForms.
-        //     }else{
-        //         i++
-        //     }
-        // })
     }
 
     return(
@@ -35,9 +29,9 @@ export default function EducationContainer(){
             }
 
             <Button text="Add" className="w-full mt-10 m-auto tablet:max-w-[150px]" onClick={()=>{
-                let num = Math.random();
+                let id = uuidv4();
                 let form : educationFormat = {
-                    key: num,
+                    key: id,
                     values: {
                         schoolName: "",
                         GPA: "",
