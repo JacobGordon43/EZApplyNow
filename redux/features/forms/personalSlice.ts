@@ -2,7 +2,7 @@ import { formGroupClasses } from '@mui/material';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 //Creates a new type for the initial state of the slice
 type InitialState = {
-    value: EducationState;
+    value: PersonalState;
 }
 export type educationFormat = {
     key: string,
@@ -21,18 +21,27 @@ export type personalFormFormat = {
 }
 
 //Creates a new type for the state of the auth slice
-type EducationState = {
+type PersonalState = {
     form: personalFormFormat
 }
 //Creates the initial state using the InitialState type as its type
 const initialState = {
     value: {
-        form: []
-    } as unknown as EducationState
+        form: {
+            firstName : "",
+            lastName : "",
+            address : "",
+            state : "",
+            county : "",
+            zipcode : "",
+            phoneNumber : "",
+            phoneNumberType : ""
+        }
+    } as unknown as PersonalState
 } as InitialState
 //Creates a new slice, giving it a name and the intial state, as well as reducers to provide login and logout capabilities.
-export const education = createSlice({
-    name: "education",
+export const personal = createSlice({
+    name: "personal",
     initialState,
     reducers: {
         // addForm: (state, action: PayloadAction<>) =>{
@@ -43,8 +52,8 @@ export const education = createSlice({
         //         }
         //     }
         // },
-        setForms: (state, action: PayloadAction<personalFormFormat>) =>{
-
+        setForm: (state, action: PayloadAction<personalFormFormat>) =>{
+            localStorage.setItem("personalForm", JSON.stringify(action.payload))
             return{
                 value:{
                     form: action.payload
@@ -54,5 +63,5 @@ export const education = createSlice({
     }
 })
 
-export const { setForms } = education.actions;
-export default education.reducer;
+export const { setForm } = personal.actions;
+export default personal.reducer;
