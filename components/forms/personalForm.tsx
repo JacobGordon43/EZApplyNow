@@ -10,8 +10,9 @@ import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 //import router from "next/router"
 import { useRouter } from "next/navigation";
+import { v4 } from "uuid";
 
-export default function LoginForm(){
+export default function PersonalForm(){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
     console.log(json)
@@ -46,29 +47,27 @@ export default function LoginForm(){
     const router = useRouter();
     //dispatch(clearErrors())
 
-    useEffect(()=>{
-        setEmailError(false);
-        setPasswordError(false);
-        setLoginError(false);
-        errors.map((error: { input: string, message : string })=>{
-            if(error.input == "email"){
-                setEmailError(true)
-            }
+    // useEffect(()=>{
+    //     setEmailError(false);
+    //     setPasswordError(false);
+    //     setLoginError(false);
+    //     errors.map((error: { input: string, message : string })=>{
+    //         if(error.input == "email"){
+    //             setEmailError(true)
+    //         }
     
-            if(error.input == "password"){
-                setPasswordError(true)
-            }
+    //         if(error.input == "password"){
+    //             setPasswordError(true)
+    //         }
 
-            if(error.input == "login"){
-                setLoginError(true);
-                setLoginErrorMessage(error.message)
-            }
-        })    
-    }, [emailError, errors, passwordError, loginError, loginErrorMessage] )
+    //         if(error.input == "login"){
+    //             setLoginError(true);
+    //             setLoginErrorMessage(error.message)
+    //         }
+    //     })    
+    // }, [emailError, errors, passwordError, loginError, loginErrorMessage] )
     
-    async function uploadData(e : MouseEvent){
-        e.preventDefault();
-        //const router = useRouter();
+    async function uploadData(){
         let statusCode = 0;
         console.log("In upload function");
         
@@ -84,27 +83,29 @@ export default function LoginForm(){
             "domainPrefix": "localhost",
             "time": new Date(),
             "body": {
-                "table": "personalFormData",
-                "data": {
+                tableName: "personalFormData",
+                data: {
+                    formId: v4(),
                     firstName,
                     lastName,
                     address, 
                     county,
                     zipcode,
                     phoneNumber,
-                    phoneNumberType
+                    phoneNumberType,
+                    userId: localStorage.getItem('userId')
                 }
-                // "email": email,
-                // "password": password
             }
             })
         }).then((res)=>{
             //Setting the statusCode to check later
             statusCode = res.status
             console.log(statusCode);
+            console.log(res);
             //Returning the body of the data, which contains our message
             return res.json()
         }).then((data)=>{
+            console.log(data);
             //Checking the status code to determine how to handle the request
             // if(statusCode == 401){
             //     errorMessages.push({input: "login", message: data.message})
@@ -125,6 +126,7 @@ export default function LoginForm(){
     const saveForm = (e : MouseEvent) => {
         e.preventDefault();
         dispatch(setForm({firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
+        uploadData();
         setSuccessfulSave(true)
     }
 
