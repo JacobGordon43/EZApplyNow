@@ -73,7 +73,7 @@ export default function PersonalForm(){
         
         //Prevents a call from being made to the API gateway if there are any error messages
 
-        await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/uploadData", {
+        return await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/uploadData", {
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -90,6 +90,7 @@ export default function PersonalForm(){
                     lastName,
                     address, 
                     county,
+                    state,
                     zipcode,
                     phoneNumber,
                     phoneNumberType,
@@ -98,15 +99,14 @@ export default function PersonalForm(){
             }
             })
         }).then((res)=>{
-            //Setting the statusCode to check later
-            statusCode = res.status
-            console.log(statusCode);
-            console.log(res);
-            //Returning the body of the data, which contains our message
-            return res.json()
-        }).then((data)=>{
-            console.log(data);
+            return res.status
+        }).then((statusCode)=>{
             //Checking the status code to determine how to handle the request
+            if(statusCode == 200){
+                return true
+            }else{
+                return false
+            }
             // if(statusCode == 401){
             //     errorMessages.push({input: "login", message: data.message})
             // }else if(statusCode == 200){
@@ -123,11 +123,16 @@ export default function PersonalForm(){
 
 
 
-    const saveForm = (e : MouseEvent) => {
+    const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
-        dispatch(setForm({firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
-        uploadData();
-        setSuccessfulSave(true)
+        //let uploaded = useAppSelector((state)=>state.personalReducer.value.form.uploaded)
+        //dispatch(setForm({uploaded: uploaded, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
+        let upload : Promise<boolean> = uploadData();
+        if(await upload == true){
+            setSuccessfulSave(true)
+            dispatch(setForm({uploaded: true, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
+            console.log(localStorage.getItem('personalForm'));
+        }
     }
 
     return(

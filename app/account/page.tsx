@@ -2,11 +2,13 @@
 import { Box } from "@mui/material";
 import PersonalForm from "@/components/forms/personalForm"
 import TopSection from "@/components/TopSection";
-
+import { getFormData } from "@/server-actions/uploadData";
 import FormDropdown from "@/components/Accordion";
 import EducationForm from "@/components/forms/EducationForm";
 import EducationContainer from "@/components/forms/EducationContainer";
 export default function Account(){
+    getFormData()
+
     return(
         <Box>
             <TopSection title="Account"/>
