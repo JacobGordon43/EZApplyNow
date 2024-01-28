@@ -15,20 +15,6 @@ import { v4 } from "uuid";
 export default function PersonalForm(){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
-    console.log(json)
-    const values = useAppSelector((state)=>{
-        return {
-            "firstName": state.personalReducer.value.form.firstName, 
-            "lastName": state.personalReducer.value.form.lastName, 
-            "address": state.personalReducer.value.form.address,
-            "state": state.personalReducer.value.form.state,
-            "county": state.personalReducer.value.form.county,
-            "zipcode": state.personalReducer.value.form.zipcode,
-            "phoneNumber": state.personalReducer.value.form.phoneNumber,
-            "phoneNumberType": state.personalReducer.value.form.phoneNumberType
-        }
- 
-    })
     const [firstName, setFirstName] = useState(json.firstName);
     const [lastName, setLastName] = useState(json.lastName);
     const [address, setAddress] = useState(json.address);
@@ -37,36 +23,10 @@ export default function PersonalForm(){
     const [zipcode, setZipcode] = useState(json.zipcode);
     const [phoneNumber, setPhoneNumber] = useState(json.phoneNumber);
     const [phoneNumberType, setPhoneNumberType] = useState(json.phoneNumberType);
-    //const [statusCode, setStatusCode] = useState(0);
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [loginError, setLoginError] = useState(false)
-    const [loginErrorMessage, setLoginErrorMessage] = useState("There was an issue logging in.")
+    const [uploaded, setUploaded] = useState(useAppSelector((state)=>state.personalReducer.value.form.uploaded))
     const [successfulSave, setSuccessfulSave] = useState(false);
-    const errors = useAppSelector((state)=>state.errorMessagesReducer.value.errors);
-    const router = useRouter();
-    //dispatch(clearErrors())
 
-    // useEffect(()=>{
-    //     setEmailError(false);
-    //     setPasswordError(false);
-    //     setLoginError(false);
-    //     errors.map((error: { input: string, message : string })=>{
-    //         if(error.input == "email"){
-    //             setEmailError(true)
-    //         }
-    
-    //         if(error.input == "password"){
-    //             setPasswordError(true)
-    //         }
 
-    //         if(error.input == "login"){
-    //             setLoginError(true);
-    //             setLoginErrorMessage(error.message)
-    //         }
-    //     })    
-    // }, [emailError, errors, passwordError, loginError, loginErrorMessage] )
-    
     async function uploadData(){
         let statusCode = 0;
         console.log("In upload function");
@@ -121,13 +81,18 @@ export default function PersonalForm(){
         })
     }
 
-
+    
 
     const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
         //let uploaded = useAppSelector((state)=>state.personalReducer.value.form.uploaded)
         //dispatch(setForm({uploaded: uploaded, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
-        let upload : Promise<boolean> = uploadData();
+        let upload : Promise<boolean> ;
+        if(uploaded){
+            upload = uploadData();
+        }else{
+            //submitData()
+        }
         if(await upload == true){
             setSuccessfulSave(true)
             dispatch(setForm({uploaded: true, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))

@@ -2,7 +2,7 @@ import { ReduxProvider } from '@/redux/provider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { getFormData } from '@/server-actions/uploadData'
+import { getFormData } from '@/server-actions/receiveData'
 
 const inter = Inter({ subsets: ['latin'] })
 

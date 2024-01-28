@@ -2,22 +2,21 @@
 import { Box } from "@mui/material";
 import PersonalForm from "@/components/forms/personalForm"
 import TopSection from "@/components/TopSection";
-import { getFormData } from "@/server-actions/uploadData";
+import { GetFormData } from "@/server-actions/receiveData";
 import FormDropdown from "@/components/Accordion";
 import EducationForm from "@/components/forms/EducationForm";
 import EducationContainer from "@/components/forms/EducationContainer";
 export default function Account(){
-    getFormData()
+    GetFormData()
 
     return(
         <Box>
             <TopSection title="Account"/>
-            <FormDropdown children={<PersonalForm />} value="personalForm" text="Personal Information"/>
-            <FormDropdown children={<EducationContainer />} value="education" text="Education"/>
-            <FormDropdown children={<PersonalForm />} value="workHistory" text="Work History"/>
-            <FormDropdown children={<PersonalForm />} value="skills" text="Skills"/>
-            <FormDropdown children={<PersonalForm />} value="nonDisclosureForm" text="Non Disclosure Information"/>
-
+            <FormDropdown value="personalForm" text="Personal Information"><PersonalForm /></FormDropdown>
+            <FormDropdown value="education" text="Education"><EducationContainer /></FormDropdown>
+            <FormDropdown value="workHistory" text="Work History"><EducationContainer /></FormDropdown>
+            <FormDropdown value="skills" text="Skills"><PersonalForm /></FormDropdown>
+            <FormDropdown value="nonDisclosureForm" text="Non Disclosure Information"><PersonalForm /></FormDropdown>
         </Box>
     )
 }
