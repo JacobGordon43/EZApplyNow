@@ -10,6 +10,8 @@ export type educationFormat = {
 }
 
 export type educationFormFormat = {
+    uploaded : boolean
+    formId : string,
     schoolName : string,
     GPA : string,
     endDate : string,
@@ -33,14 +35,6 @@ export const education = createSlice({
     name: "education",
     initialState,
     reducers: {
-        // addForm: (state, action: PayloadAction<>) =>{
-
-        //     return{
-        //         value:{
-        //             //forms: action.payload.forms.push(action.payload.form)
-        //         }
-        //     }
-        // },
         setForms: (state, action: PayloadAction<Array<educationFormat>>) =>{
 
             return{

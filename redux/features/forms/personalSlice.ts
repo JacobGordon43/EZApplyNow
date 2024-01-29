@@ -10,7 +10,8 @@ export type educationFormat = {
 }
 
 export type personalFormFormat = {
-    uploaded : boolean
+    uploaded : boolean,
+    formId : string,
     firstName : string,
     lastName : string,
     address : string,
@@ -30,6 +31,7 @@ const initialState = {
     value: {
         form: {
             uploaded: false,
+            formId: "",
             firstName : "",
             lastName : "",
             address : "",

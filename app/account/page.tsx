@@ -7,8 +7,8 @@ import FormDropdown from "@/components/Accordion";
 import EducationForm from "@/components/forms/EducationForm";
 import EducationContainer from "@/components/forms/EducationContainer";
 export default function Account(){
-    GetFormData()
-
+    GetFormData("personalFormData");
+    GetFormData("educationFormData")
     return(
         <Box>
             <TopSection title="Account"/>

@@ -9,12 +9,11 @@ import { validateEmail, validatePassword } from "@/server-actions/validation";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 //import router from "next/router"
-import { useRouter } from "next/navigation";
-import { v4 } from "uuid";
-
+import {saveData} from '../../server-actions/receiveData'
 export default function PersonalForm(){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
+    const [formId, setFormId] = useState(json.formId);
     const [firstName, setFirstName] = useState(json.firstName);
     const [lastName, setLastName] = useState(json.lastName);
     const [address, setAddress] = useState(json.address);
@@ -23,86 +22,43 @@ export default function PersonalForm(){
     const [zipcode, setZipcode] = useState(json.zipcode);
     const [phoneNumber, setPhoneNumber] = useState(json.phoneNumber);
     const [phoneNumberType, setPhoneNumberType] = useState(json.phoneNumberType);
-    const [uploaded, setUploaded] = useState(useAppSelector((state)=>state.personalReducer.value.form.uploaded))
     const [successfulSave, setSuccessfulSave] = useState(false);
-
-
-    async function uploadData(){
-        let statusCode = 0;
-        console.log("In upload function");
-        
-        //Prevents a call from being made to the API gateway if there are any error messages
-
-        return await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/uploadData", {
-        method: "POST",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            "domainName": "localhost.com/login",
-            "domainPrefix": "localhost",
-            "time": new Date(),
-            "body": {
-                tableName: "personalFormData",
-                data: {
-                    formId: v4(),
-                    firstName,
-                    lastName,
-                    address, 
-                    county,
-                    state,
-                    zipcode,
-                    phoneNumber,
-                    phoneNumberType,
-                    userId: localStorage.getItem('userId')
-                }
-            }
-            })
-        }).then((res)=>{
-            return res.status
-        }).then((statusCode)=>{
-            //Checking the status code to determine how to handle the request
-            if(statusCode == 200){
-                return true
-            }else{
-                return false
-            }
-            // if(statusCode == 401){
-            //     errorMessages.push({input: "login", message: data.message})
-            // }else if(statusCode == 200){
-            //     console.log({email, uid:data.userId, name:data.name})
-            //     document.cookie = `email=${email}; userId=${data.userId}; name=${data.name}`
-            //     console.log(document.cookie);
-            //     dispatch(login({email, uid:data.userId, name:data.name}));
-            //     router.push("/");
-            // }else{
-            //     errorMessages.push({input: "signup", message: "There was an issue with the server. Please try again later."})
-            // }
-        })
-    }
-
-    
+    const [failedSave, setFailedSave] = useState(false);
 
     const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
+        
         //let uploaded = useAppSelector((state)=>state.personalReducer.value.form.uploaded)
         //dispatch(setForm({uploaded: uploaded, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
-        let upload : Promise<boolean> ;
-        if(uploaded){
-            upload = uploadData();
-        }else{
-            //submitData()
-        }
+        let upload : Promise<boolean> = saveData({
+            formId,
+            firstName,
+            lastName,
+            address, 
+            county,
+            state,
+            zipcode,
+            phoneNumber,
+            phoneNumberType,
+            userId: localStorage.getItem('userId')
+        });
+
         if(await upload == true){
             setSuccessfulSave(true)
-            dispatch(setForm({uploaded: true, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
+            setFailedSave(false)
+            dispatch(setForm({uploaded: true, formId: formId, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
             console.log(localStorage.getItem('personalForm'));
+        }else{
+            setFailedSave(true);
+            setSuccessfulSave(false);
         }
     }
 
     return(
         <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] ">
             {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}
+            {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}
+
             <div className="desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
                 <div className="flex flex-col">
                     <label>First Name</label>
@@ -139,7 +95,7 @@ export default function PersonalForm(){
                 </div> 
             </div>
             <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
-                    <Button text="Save" className="px-3 bg-[#2DC653]" onClick={(e)=> saveForm(e)}/>
+                <Button text="Save" className="px-3 bg-[#2DC653]" onClick={(e)=> saveForm(e)}/>
             </Box>
         </form>
     )

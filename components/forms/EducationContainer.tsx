@@ -19,11 +19,22 @@ export default function EducationContainer(){
         dispatch(setForms(arr));
     }
 
+    const saveForm = (e : MouseEvent, key : string) =>{
+        e.preventDefault();
+        let arr = selectorForms;
+        arr.forEach(element => {
+            if(element.key == key){
+                // element = 
+            }
+        });
+    }
     return(
         <div className="tablet:flex flex-col">
             {
                 selectorForms.map(form=>{
-                    let newForm = <EducationForm key={form.key} btn={<Button text="Delete" className="bg-red-500 mb-3 tablet:mb-0" onClick={(e)=>{deleteForm(e, form.key)}}/>}/>
+                    let deleteBtn = <Button text="Delete" className="bg-red-500 mb-3 tablet:mb-0" onClick={(e)=>{deleteForm(e, form.key)}}/>
+                    let saveBtn = <Button text="Sae" className="bg-red-500 mb-3 tablet:mb-0" onClick={(e)=>{saveForm(e, form.key)}}/>
+                    let newForm = <EducationForm key={form.key} deleteBtn={deleteBtn} saveBtn={saveBtn}/>
                     return newForm
                 })
             }
@@ -33,6 +44,8 @@ export default function EducationContainer(){
                 let form : educationFormat = {
                     key: id,
                     values: {
+                        uploaded: false,
+                        formId: "",
                         schoolName: "",
                         GPA: "",
                         endDate: "",
