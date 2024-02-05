@@ -3,9 +3,9 @@ import { AppDispatch } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { v4 } from "uuid";
 
-export async function GetFormData(tableName : string){
+export async function GetFormData(tableName : string, setForm : Function){
     const dispatch = useDispatch<AppDispatch>()
-    await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/getData/getPersonalFormData", {
+    let results = await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/getData/getPersonalFormData", {
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -23,14 +23,14 @@ export async function GetFormData(tableName : string){
         }).then((res)=>res.json())
         .then((body)=>{
             body = JSON.parse(body.body)
-            if(body.result != undefined){
-                dispatch(setForm({uploaded: true, formId:body.result.formId, firstName: body.result.firstName, lastName: body.result.lastName, address: body.result.address, state: body.result.state, county: body.result.county, zipcode: body.result.zipcode, phoneNumber: body.result.phoneNumber, phoneNumberType: body.result.phoneNumberType}))
-            }
+            dispatch(setForm({uploaded: true, ...body.result }))
+
         }
         )
+        return results;
     }
 
-    export async function saveData(data : any){
+    export async function saveData(tableName : string, data : any){
         let statusCode = 0;
         console.log("In upload function");
         if(data.formId == ""){
@@ -48,7 +48,7 @@ export async function GetFormData(tableName : string){
             "domainPrefix": "localhost",
             "time": new Date(),
             "body": {
-                tableName: "personalFormData",
+                tableName,
                 data
             }
             })

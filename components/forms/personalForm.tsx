@@ -30,7 +30,7 @@ export default function PersonalForm(){
         
         //let uploaded = useAppSelector((state)=>state.personalReducer.value.form.uploaded)
         //dispatch(setForm({uploaded: uploaded, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
-        let upload : Promise<boolean> = saveData({
+        let upload : Promise<boolean> = saveData("personalFormData", {
             formId,
             firstName,
             lastName,

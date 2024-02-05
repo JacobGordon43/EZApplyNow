@@ -9,11 +9,13 @@ import { logout } from "@/redux/features/authSlice";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import Button from "./Button";
+import { useRouter } from "next/navigation";
 
 //A navbar that uses Radix to create it's architecture. Additional styling is added for giving it a simple but modern look. Next's Link is used to provide navigation to different pages
 //Uses radix for an account dropdown selection.
 export default function Navbar(){
     const dispatch = useDispatch<AppDispatch>();
+    const router = useRouter();
     const name = useAppSelector((state) => state.authReducer.value.name)
     return(
         <NavigationMenu.Root className="hidden tablet:flex w-screen justify-center">
@@ -44,6 +46,7 @@ export default function Navbar(){
                                         <DropdownMenu.Item className="p-2 hover:bg-[#EEE] hover:rounded-b-md">
                                             <button className="w-full" onClick={(e)=>{
                                                 e.preventDefault();
+                                                router.push("/")
                                                 dispatch(logout());
                                                 }}>Logout</button>
                                         </DropdownMenu.Item>

@@ -3,6 +3,8 @@ import authReducer from './features/authSlice'
 import errorMessagesReducer from './features/errorSlice';
 import educationReducer from './features/forms/educationSlice';
 import personalReducer from './features/forms/personalSlice';
+import disclosureReducer from './features/forms/nonDisclosureSlice';
+import skillReducer from './features/forms/skillsSlice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 //Creates a store that we use to provide the reducers to the application.
 export const store = configureStore({
@@ -10,7 +12,9 @@ export const store = configureStore({
         authReducer,
         errorMessagesReducer,
         educationReducer,
-        personalReducer
+        personalReducer,
+        disclosureReducer,
+        skillReducer
     }
 })
 

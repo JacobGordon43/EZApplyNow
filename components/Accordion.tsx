@@ -14,10 +14,6 @@ interface DropDownProps{
 }
 
 export default function FormDropdown({children, text, value} : DropDownProps){
-    const router = useRouter();
-    if(localStorage.length === 0){
-        router.push("/");
-    }
     return(
         <Accordion.Root type='single' collapsible className={cn("w-11/12 max-w-[800px] m-auto")}>
             <Accordion.Item value={value}>
