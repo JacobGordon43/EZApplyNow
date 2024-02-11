@@ -6,7 +6,7 @@ import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
-import {saveData} from '../../server-actions/receiveData'
+import {saveData} from '../../server-actions/handleData'
 
 interface LoginForm {
     deleteBtn : React.ReactNode,

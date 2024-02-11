@@ -22,6 +22,7 @@ const initialState = {
     value: {
         form: {
             uploaded: false,
+            formId: "",
             skills: [{"key": "gfnjfad", "skill": "Skill 1"}, {"key": "hjdadbb", "skill": "Skill 2"}]
         }
     } as unknown as SkillsState

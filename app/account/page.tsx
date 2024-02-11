@@ -2,7 +2,7 @@
 import { Box } from "@mui/material";
 import PersonalForm from "@/components/forms/personalForm"
 import TopSection from "@/components/TopSection";
-import { GetFormData } from "@/server-actions/receiveData";
+import { GetFormData } from "@/server-actions/handleData";
 import FormDropdown from "@/components/Accordion";
 import EducationForm from "@/components/forms/EducationForm";
 import EducationContainer from "@/components/forms/EducationContainer";
@@ -17,7 +17,7 @@ export default function Account(){
         router.push("/");
     }
     
-    GetFormData("personalFormData", setPersonalForm);
+    //GetFormData("personalFormData", setPersonalForm);
     GetFormData("nonDisclosureFormData", setDisclosureForm);
     //GetFormData("educationFormData");
     return(

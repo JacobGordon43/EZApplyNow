@@ -33,7 +33,7 @@ export async function GetFormData(tableName : string, setForm : Function){
     export async function saveData(tableName : string, data : any){
         let statusCode = 0;
         console.log("In upload function");
-        if(data.formId == ""){
+        if(data.formId == "" || data.formId == undefined){
             data.formId = v4();
         }
         //Prevents a call from being made to the API gateway if there are any error messages
@@ -53,6 +53,8 @@ export async function GetFormData(tableName : string, setForm : Function){
             }
             })
         }).then((res)=>{
+            console.log(res);
+            console.log(res.json())
             return res.status
         }).then((statusCode)=>{
             //Checking the status code to determine how to handle the request

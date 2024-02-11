@@ -7,7 +7,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 //import router from "next/router"
-import {saveData} from '../../server-actions/receiveData'
+import {saveData} from '../../server-actions/handleData'
 export default function NonDisclosureForm(){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
@@ -50,7 +50,7 @@ export default function NonDisclosureForm(){
     return(
         <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] ">
             {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}
-            {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}
+            {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was not saved</Box>}
 
             <div className="desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
                 <div className="flex flex-col">
