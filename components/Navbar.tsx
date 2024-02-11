@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 export default function Navbar(){
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
-    const name = useAppSelector((state) => state.authReducer.value.name)
+    //const name = useAppSelector((state) => state.authReducer.value.name)
     return(
         <NavigationMenu.Root className="hidden tablet:flex w-screen justify-center">
             <NavigationMenu.List className="flex flex-row">

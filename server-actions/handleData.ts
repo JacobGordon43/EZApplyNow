@@ -23,6 +23,7 @@ export async function GetFormData(tableName : string, setForm : Function){
         }).then((res)=>res.json())
         .then((body)=>{
             body = JSON.parse(body.body)
+            console.log(body);
             dispatch(setForm({uploaded: true, ...body.result }))
 
         }

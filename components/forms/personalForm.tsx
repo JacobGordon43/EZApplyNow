@@ -9,10 +9,11 @@ import { validateEmail, validatePassword } from "@/server-actions/validation";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 //import router from "next/router"
-import {saveData} from '../../server-actions/handleData'
+import {GetFormData, saveData} from '../../server-actions/handleData'
 export default function PersonalForm(){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
+    
     const [formId, setFormId] = useState(json.formId);
     const [firstName, setFirstName] = useState(json.firstName);
     const [lastName, setLastName] = useState(json.lastName);
@@ -24,6 +25,8 @@ export default function PersonalForm(){
     const [phoneNumberType, setPhoneNumberType] = useState(json.phoneNumberType);
     const [successfulSave, setSuccessfulSave] = useState(false);
     const [failedSave, setFailedSave] = useState(false);
+
+    //GetFormData("personalFormData", setForm);
 
     const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
