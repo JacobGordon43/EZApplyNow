@@ -59,7 +59,7 @@ export default function EducationContainer(){
             {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was not saved</Box>}
 
             <div className="flex pb-3 gap-2">
-                <input type="text" className="p-1 border-[#eee] border-2 shadow-sm w-full" placeholder="Skill" onChange={(e)=>setSkill(e.target.value)}/>
+                <input id="skillInput" type="text" className="p-1 border-[#eee] border-2 shadow-sm w-full" placeholder="Skill" onChange={(e)=>setSkill(e.target.value)}/>
                 <Button text="Add" className="w-full mt-10 m-auto tablet:max-w-[150px]" onClick={(e)=>{
                     e.preventDefault()
                     let id = uuidv4();
