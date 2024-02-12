@@ -88,7 +88,7 @@ export default function LoginForm({saveBtn, deleteBtn} : LoginForm){
             </div>
             <Box className="flex flex-col mt-3 tablet:flex-row">
                 <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e)=> console.log('clicked')}/>
-                {saveBtn}
+                {/* {saveBtn} */}
                 {deleteBtn}
             </Box>
         </form>

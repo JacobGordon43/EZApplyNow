@@ -4,18 +4,23 @@ import {shallow} from 'enzyme';
 import { ReduxProvider } from "@/redux/provider";
 import SkillForm from "./SkillForm";
 
-describe('Education container', () => {
+describe('Skill form', () => {
     it("should add forms", ()=>{
-        const wrapper = shallow(
+        // const wrapper = shallow(
+        //     <ReduxProvider>
+        //         <SkillForm />
+        //     </ReduxProvider>)
+        const container = render(
             <ReduxProvider>
                 <SkillForm />
-            </ReduxProvider>)
-        let input = wrapper.find("#skillInput");
-        let add = wrapper.find('Add');
-        input.value = 
-        add.at(0).simulate('click');
-        let successMessage = wrapper.find("Your account was saved successfully");
-        let failureMessage = wrapper.find("Your account was not saved")
-        expect(successMessage.length > 0 || failureMessage.length > 0).toBe(true);
+            </ReduxProvider>
+        )
+        let input = container.getByPlaceholderText("Skill") as HTMLInputElement  
+        let add = container.getAllByText('Add') ;
+        input.value = "Testing"
+        add[0].click();
+        let result = container.getAllByText('Testing');
+        //Should be two, one for the string that was entered into the input and a second for the skill box that should pop up as a result
+        expect(result.length == 2).toBe(true);
     })
 });

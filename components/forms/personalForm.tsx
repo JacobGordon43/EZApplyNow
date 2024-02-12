@@ -33,6 +33,8 @@ export default function PersonalForm(){
         
         //let uploaded = useAppSelector((state)=>state.personalReducer.value.form.uploaded)
         //dispatch(setForm({uploaded: uploaded, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
+        
+        //Uploads the data and stores the results in upload
         let upload : Promise<boolean> = saveData("personalFormData", {
             formId,
             firstName,
@@ -46,6 +48,7 @@ export default function PersonalForm(){
             userId: localStorage.getItem('userId')
         });
 
+        //Once it's been uploaded, if it was uploaded then we update the UI with a success message and set the redux with the updated information. Otherwise, we display a failure message.
         if(await upload == true){
             setSuccessfulSave(true)
             setFailedSave(false)
@@ -56,7 +59,7 @@ export default function PersonalForm(){
             setSuccessfulSave(false);
         }
     }
-
+    //Displays the form for entering personal data
     return(
         <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] ">
             {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}

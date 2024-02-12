@@ -17,7 +17,7 @@ export default function Account(){
         router.push("/");
     }
     
-    //GetFormData("personalFormData", setPersonalForm);
+    GetFormData("personalFormData", setPersonalForm);
     GetFormData("nonDisclosureFormData", setDisclosureForm);
     //GetFormData("educationFormData");
     return(

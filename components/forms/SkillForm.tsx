@@ -35,6 +35,8 @@ export default function EducationContainer(){
             console.log(arr);
         });
         console.log(localStorage.getItem('userId'))
+
+        //Uploads the data and stores the results in upload        
         let upload : Promise<boolean> = saveData("skillsFormData", {
             formId,
             skills: arr,
@@ -42,6 +44,8 @@ export default function EducationContainer(){
         })
 
         console.log(upload);
+
+        //Once it's been uploaded, if it was uploaded then we update the UI with a success message and set the redux with the updated information. Otherwise, we display a failure message.
         if(await upload == true){
             setSuccessfulSave(true)
             setFailedSave(false)

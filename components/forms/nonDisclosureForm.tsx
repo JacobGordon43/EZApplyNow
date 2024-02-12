@@ -22,12 +22,13 @@ export default function NonDisclosureForm(){
     const [failedSave, setFailedSave] = useState(false);
 
 
-
     const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
         
         //let uploaded = useAppSelector((veteranStatus)=>veteranStatus.personalReducer.value.form.uploaded)
         //dispatch(setForm({uploaded: uploaded, sex: sex, disability: disability, sexualOrientation: sexualOrientation, veteranStatus: veteranStatus, race: race, ethnicity: ethnicity, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
+        
+        //Uploads the data and stores the results in upload
         let upload : Promise<boolean> = saveData("nonDisclosureFormData", {
             formId,
             sex,
@@ -37,7 +38,7 @@ export default function NonDisclosureForm(){
             ethnicity,
             userId: localStorage.getItem('userId')
         });
-
+        //Once it's been uploaded, if it was uploaded then we update the UI with a success message and set the redux with the updated information. Otherwise, we display a failure message.
         if(await upload == true){
             setSuccessfulSave(true)
             setFailedSave(false)
@@ -49,6 +50,8 @@ export default function NonDisclosureForm(){
         }
     }
 
+    //Displays non disclosure form
+    //I intiially was going to have it use select fields but having it be automatically set to an option based on the data recieved from the database was not going to work at this time
     return(
         <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] ">
             {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}
