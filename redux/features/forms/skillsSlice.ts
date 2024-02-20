@@ -23,7 +23,7 @@ const initialState = {
         form: {
             uploaded: false,
             formId: "",
-            skills: [{"key": "gfnjfad", "skill": "Skill 1"}, {"key": "hjdadbb", "skill": "Skill 2"}]
+            skills: [{key: "gfnjfad", skill: "Skill 1"}, {key: "hjdadbb", skill: "Skill 2"}]
         }
     } as unknown as SkillsState
 } as InitialState
@@ -34,6 +34,7 @@ export const skills = createSlice({
     reducers: {
         setSkills: (state, action: PayloadAction<skillsFormFormat>) =>{
             localStorage.setItem("skills", JSON.stringify(action.payload))
+            console.log(localStorage.getItem("skills"))
             return{
                 value:{ 
                     form: action.payload

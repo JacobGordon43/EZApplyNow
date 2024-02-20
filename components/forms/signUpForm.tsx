@@ -6,7 +6,7 @@ import { clearErrors, setErrors, errorFormat, errorMessages } from "@/redux/feat
 import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
 import { validateEmail, validateNotEmpty, validatePassword } from "@/server-actions/validation";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 import {v4 as uuidv4} from 'uuid';
@@ -22,6 +22,7 @@ export default function SignUpForm(){
     const [signUpErrorMessage, setsignUpErrorMessage] = useState("There was an issue creating your account in.")
     const [nameError, setNameError] = useState(false)
     const errors = useAppSelector((state)=>state.errorMessagesReducer.value.errors);
+    const router = useRouter();
 
     useEffect(()=>{
         setEmailError(false);
@@ -89,12 +90,12 @@ export default function SignUpForm(){
                     }),
                     
                     })
-                }).then((res)=>res.json()).then((data)=>{
+                }).then((res)=>res.status).then((statusCode)=>{
                     //data = JSON.parse(data.body);
-                    console.log(data);
-                    console.log(data.statusCode);
-                    if(data.statusCode == 200){
-                        redirect("/")
+                    console.log(statusCode);
+                    console.log(statusCode);
+                    if(statusCode == 200){
+                        router.push("/login")
                     }else{
                         errorMessages.push({input: "signup", message: "There was an issue with the server. Please try again later."})
                     }

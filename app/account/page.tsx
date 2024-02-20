@@ -8,17 +8,19 @@ import EducationForm from "@/components/forms/EducationForm";
 import EducationContainer from "@/components/forms/EducationContainer";
 import NonDisclosureForm from "@/components/forms/nonDisclosureForm";
 import SkillsForm from "@/components/forms/SkillForm";
-import { setForm as setPersonalForm } from "@/redux/features/forms/personalSlice";
-import { setForm as setDisclosureForm } from "@/redux/features/forms/nonDisclosureSlice"
+import { setPersonalForm } from "@/redux/features/forms/personalSlice";
+import { setNonDisclosureForm } from "@/redux/features/forms/nonDisclosureSlice"
 import { useRouter } from "next/navigation";
+import { setSkills } from "@/redux/features/forms/skillsSlice";
 export default function Account(){
     const router = useRouter();
     if(localStorage.length === 0){
         router.push("/");
     }
     
-    GetFormData("personalFormData", setPersonalForm);
-    GetFormData("nonDisclosureFormData", setDisclosureForm);
+    GetFormData("personalFormData", setPersonalForm, true);
+    GetFormData("nonDisclosureFormData", setNonDisclosureForm, true);
+    GetFormData("skillsFormData", setSkills, true);
     //GetFormData("educationFormData");
     return(
         <Box>

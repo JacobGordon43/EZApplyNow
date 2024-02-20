@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { setForm } from "@/redux/features/forms/personalSlice";
+import { setPersonalForm } from "@/redux/features/forms/personalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, setErrors, errorFormat, errorMessages } from "@/redux/features/errorSlice";
 import { useAppSelector, AppDispatch } from "@/redux/store";
@@ -14,7 +14,6 @@ export default function PersonalForm(){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
     
-    const [formId, setFormId] = useState(json.formId);
     const [firstName, setFirstName] = useState(json.firstName);
     const [lastName, setLastName] = useState(json.lastName);
     const [address, setAddress] = useState(json.address);
@@ -27,7 +26,7 @@ export default function PersonalForm(){
     const [failedSave, setFailedSave] = useState(false);
 
     //GetFormData("personalFormData", setForm);
-
+    console.log(json.formId);
     const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
         
@@ -35,8 +34,9 @@ export default function PersonalForm(){
         //dispatch(setForm({uploaded: uploaded, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
         
         //Uploads the data and stores the results in upload
+        console.log(json.formId)
         let upload : Promise<boolean> = saveData("personalFormData", {
-            formId,
+            formId: json.formId,
             firstName,
             lastName,
             address, 
@@ -46,14 +46,12 @@ export default function PersonalForm(){
             phoneNumber,
             phoneNumberType,
             userId: localStorage.getItem('userId')
-        });
+        }, setPersonalForm, dispatch);
 
         //Once it's been uploaded, if it was uploaded then we update the UI with a success message and set the redux with the updated information. Otherwise, we display a failure message.
         if(await upload == true){
             setSuccessfulSave(true)
             setFailedSave(false)
-            dispatch(setForm({uploaded: true, formId: formId, firstName: firstName, lastName: lastName, address: address, state: state, county: county, zipcode: zipcode, phoneNumber: phoneNumber, phoneNumberType: phoneNumberType}))
-            console.log(localStorage.getItem('personalForm'));
         }else{
             setFailedSave(true);
             setSuccessfulSave(false);

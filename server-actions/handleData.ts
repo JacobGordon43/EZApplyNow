@@ -1,11 +1,11 @@
-import { setForm } from "@/redux/features/forms/personalSlice"
-import { AppDispatch } from "@/redux/store"
+import { AppDispatch, useAppSelector } from "@/redux/store"
+import exp from "constants";
 import { useDispatch } from "react-redux"
 import { v4 } from "uuid";
 
 //Async function for getting form data from the AWS Database
 //tableName is the table that we're targeting and setForm is the redux function that is being used
-export async function GetFormData(tableName : string, setForm : Function){
+export async function GetFormData(tableName : string, setForm : Function, expectsOne : boolean){
     const dispatch = useDispatch<AppDispatch>()
     //Calls the AWS API Gateway to get the user data
     let results = await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/getData/getPersonalFormData", {
@@ -21,7 +21,7 @@ export async function GetFormData(tableName : string, setForm : Function){
             "time": new Date(),
             "body": JSON.stringify({
                 tableName: tableName,
-                expectsOne: true,
+                expectsOne: expectsOne,
                 userId: localStorage.getItem('userId')
             })
             })
@@ -32,7 +32,7 @@ export async function GetFormData(tableName : string, setForm : Function){
             body = JSON.parse(body.body)
             console.log(body);
             dispatch(setForm({uploaded: true, ...body.result }))
-
+            
         }
         )
         return results;
@@ -40,9 +40,9 @@ export async function GetFormData(tableName : string, setForm : Function){
 
     //An async function that is saving the data to AWS
     //tableName is the name of the DynamoDB table that we're targeting and data is the JSON formatted data that we are sending.
-    export async function saveData(tableName : string, data : any){
+    export async function saveData(tableName : string, data : any, setForm : Function, dispatch : AppDispatch){
         console.log("In upload function");
-
+        console.log(data.formId);
         //If the form does not have an Id, we generate a new one (this is for first time uploads)
         if(data.formId == "" || data.formId == undefined){
             data.formId = v4();
@@ -71,6 +71,11 @@ export async function GetFormData(tableName : string, setForm : Function){
         }).then((statusCode)=>{
             //Checking the status code to determine how to handle the request
             if(statusCode == 200){
+                dispatch(setForm({uploaded: true, ...data }))
+                console.log(localStorage.getItem("personalForm"));
+                console.log(localStorage.getItem("nonDisclosureForm"));
+                // const personalForm = useAppSelector((state)=>state.personalReducer.value.personalForm)
+                // console.log(personalForm)
                 return true
             }else{
                 return false

@@ -1,13 +1,12 @@
-import { formGroupClasses } from '@mui/material';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 //Creates a new type for the initial state of the slice
 type InitialState = {
-    value: PersonalState;
+    value: nonDisclosureState;
 }
-export type educationFormat = {
-    key: string,
-    values: nonDisclosureFormFormat
-}
+// export type educationFormat = {
+//     key: string,
+//     values: nonDisclosureFormFormat
+// }
 
 export type nonDisclosureFormFormat = {
     uploaded : boolean,
@@ -21,13 +20,13 @@ export type nonDisclosureFormFormat = {
 }
 
 //Creates a new type for the state of the auth slice
-type PersonalState = {
-    form: nonDisclosureFormFormat
+type nonDisclosureState = {
+    nonDisclosureForm: nonDisclosureFormFormat
 }
 //Creates the initial state using the InitialState type as its type
 const initialState = {
     value: {
-        form: {
+        nonDisclosureForm: {
             uploaded: false,
             formId: "",
             sex : "",
@@ -35,25 +34,28 @@ const initialState = {
             ethnicity : "",
             veteranStatus : "",
             // sexualOrientation : "",
-            disability : ""
+            disability : "",
+            userId : ""
         }
-    } as unknown as PersonalState
+    } as unknown as nonDisclosureState
 } as InitialState
 //Creates a new slice, giving it a name and the intial state, as well as reducers to provide login and logout capabilities.
 export const nonDisclosure = createSlice({
-    name: "personal",
+    name: "nonDisclosure",
     initialState,
     reducers: {
-        setForm: (state, action: PayloadAction<nonDisclosureFormFormat>) =>{
-            localStorage.setItem("nonDisclosureSlice", JSON.stringify(action.payload))
+        setNonDisclosureForm: (state, action: PayloadAction<nonDisclosureFormFormat>) =>{
+            console.log("In set form")
+            localStorage.setItem("nonDisclosureForm", JSON.stringify(action.payload))
+            console.log(localStorage.getItem("nonDisclosureForm"))
             return{
                 value:{
-                    form: action.payload
+                    nonDisclosureForm: action.payload
                 }
             }
         },
     }
 })
 
-export const { setForm } = nonDisclosure.actions;
+export const { setNonDisclosureForm } = nonDisclosure.actions;
 export default nonDisclosure.reducer;

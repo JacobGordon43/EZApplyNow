@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { setForm } from "@/redux/features/forms/nonDisclosureSlice";
+import { setNonDisclosureForm } from "@/redux/features/forms/nonDisclosureSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import Button from "../Button";
 import {GetFormData, saveData} from '../../server-actions/handleData'
 export default function NonDisclosureForm(){
     const dispatch = useDispatch<AppDispatch>();
-    const json = JSON.parse(localStorage.getItem("personalForm") || "{}")
+    const json = JSON.parse(localStorage.getItem("nonDisclosureForm") || "{}")
     const [formId, setFormId] = useState(json.formId);
     const [sex, setSex] = useState(json.sex);
     const [disability, setDisability] = useState(json.disability);
@@ -20,8 +20,7 @@ export default function NonDisclosureForm(){
     const [ethnicity, setEthnicity] = useState(json.ethnicity);
     const [successfulSave, setSuccessfulSave] = useState(false);
     const [failedSave, setFailedSave] = useState(false);
-
-
+    console.log(json)
     const saveForm = async (e : MouseEvent) => {
         e.preventDefault();
         
@@ -30,20 +29,20 @@ export default function NonDisclosureForm(){
         
         //Uploads the data and stores the results in upload
         let upload : Promise<boolean> = saveData("nonDisclosureFormData", {
-            formId,
+            formId: json.formId,
             sex,
             disability,
             race,
             veteranStatus,
             ethnicity,
             userId: localStorage.getItem('userId')
-        });
+        }, setNonDisclosureForm, dispatch);
         //Once it's been uploaded, if it was uploaded then we update the UI with a success message and set the redux with the updated information. Otherwise, we display a failure message.
         if(await upload == true){
             setSuccessfulSave(true)
             setFailedSave(false)
-            dispatch(setForm({uploaded: true, formId: formId, sex: sex, disability: disability, veteranStatus: veteranStatus, race: race, ethnicity: ethnicity}))
-            console.log(localStorage.getItem('personalForm'));
+            // dispatch(setNonDisclosureForm({uploaded: true, formId: formId, sex: sex, disability: disability, veteranStatus: veteranStatus, race: race, ethnicity: ethnicity}))
+            console.log(localStorage.getItem('nonDisclosureForm'));
         }else{
             setFailedSave(true);
             setSuccessfulSave(false);
@@ -61,58 +60,22 @@ export default function NonDisclosureForm(){
                 <div className="flex flex-col">
                     <label>What is your sex?</label>
                     <input type="text" placeholder="Male" value={sex} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSex(e.target.value)}/>
-                    {/* <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSex(e.target.value)}>
-                        <option value="unselected">Select One</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Prefer not to answer">Prefer not to answer</option>
-                    </select> */}
                 </div> 
                 <div className="flex flex-col">
                     <label>Do you have any disabilities?</label>
                     <input type="text" placeholder="No Disability" value={disability} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setDisability(e.target.value)}/>
-
-                    {/* <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setDisability(e.target.value)}>
-                        <option value="unselected">Select One</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Prefer not to answer">Prefer not to answer</option>
-
-                    </select>                 */}
                 </div> 
                 <div className="flex flex-col">
                     <label>Are you a protected veteran?</label>
                     <input type="text" placeholder="Not a protected veteran" value={veteranStatus} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setVeteranStatus(e.target.value)}/>
-                    {/* <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setVeteranStatus(e.target.value)}>
-                        <option value="Select One">Select One</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Prefer not to answer">Prefer not to answer</option>
-
-                    </select>                 */}
                     </div>  
                 <div className="flex flex-col">
                     <label>Race</label>
                     <input type="text" placeholder="White" value={race} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setRace(e.target.value)}/>
-                    {/* <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setRace(e.target.value)}>
-                        <option value="Select One">Select One</option>
-                        <option value="White">White</option>
-                        <option value="...">...</option>
-                        <option value="Prefer not to answer">Prefer not to answer</option>
-
-                    </select>                 */}
                 </div> 
                 <div className="flex flex-col">
                     <label>Ethnicity</label>
                     <input type="text" placeholder="Not Hispanic" value={ethnicity} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEthnicity(e.target.value)}/>
-
-                    {/* <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEthnicity(e.target.value)}>
-                        <option value="Select One">Select One</option>
-                        <option value="Hispanic">Hispanic</option>
-                        <option value="Not Hispanic">Not Hispanic</option>
-                        <option value="Prefer not to answer">Prefer not to answer</option>
-
-                    </select>                 */}
                 </div>
             </div>
             <Box className="flex flex-col mt-3 tablet:flex-row justify-between">

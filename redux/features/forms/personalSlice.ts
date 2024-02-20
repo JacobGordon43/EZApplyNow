@@ -1,17 +1,16 @@
-import { formGroupClasses } from '@mui/material';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 //Creates a new type for the initial state of the slice
 type InitialState = {
     value: PersonalState;
 }
-export type educationFormat = {
-    key: string,
-    values: personalFormFormat
-}
+// export type educationPersonalFormat = {
+//     key: string,
+//     values: personalFormFormat
+// }
 
 export type personalFormFormat = {
     uploaded : boolean,
-    formId : string,
+    formId : string
     firstName : string,
     lastName : string,
     address : string,
@@ -19,19 +18,19 @@ export type personalFormFormat = {
     county : string,
     zipcode : string,
     phoneNumber : string,
-    phoneNumberType : string
+    phoneNumberType : string,
 }
 
 //Creates a new type for the state of the auth slice
 type PersonalState = {
-    form: personalFormFormat
+    personalForm: personalFormFormat
 }
 //Creates the initial state using the InitialState type as its type
 const initialState = {
     value: {
-        form: {
+        personalForm: {
             uploaded: false,
-            formId: "",
+            formId : "",
             firstName : "",
             lastName : "",
             address : "",
@@ -39,7 +38,7 @@ const initialState = {
             county : "",
             zipcode : "",
             phoneNumber : "",
-            phoneNumberType : ""
+            phoneNumberType : "",
         }
     } as unknown as PersonalState
 } as InitialState
@@ -48,24 +47,24 @@ export const personal = createSlice({
     name: "personal",
     initialState,
     reducers: {
-        // addForm: (state, action: PayloadAction<>) =>{
+        // addPersonalForm: (state, action: PayloadAction<>) =>{
 
         //     return{
         //         value:{
-        //             //forms: action.payload.forms.push(action.payload.form)
+        //             //personalforms: action.payload.personalforms.push(action.payload.personalform)
         //         }
         //     }
         // },
-        setForm: (state, action: PayloadAction<personalFormFormat>) =>{
+        setPersonalForm: (state, action: PayloadAction<personalFormFormat>) =>{
             localStorage.setItem("personalForm", JSON.stringify(action.payload))
             return{
                 value:{
-                    form: action.payload
+                    personalForm: action.payload
                 }
             }
         },
     }
 })
 
-export const { setForm } = personal.actions;
+export const { setPersonalForm } = personal.actions;
 export default personal.reducer;
