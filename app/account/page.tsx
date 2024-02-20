@@ -12,6 +12,7 @@ import { setPersonalForm } from "@/redux/features/forms/personalSlice";
 import { setNonDisclosureForm } from "@/redux/features/forms/nonDisclosureSlice"
 import { useRouter } from "next/navigation";
 import { setSkills } from "@/redux/features/forms/skillsSlice";
+import { setEducationForms } from "@/redux/features/forms/educationSlice";
 export default function Account(){
     const router = useRouter();
     if(localStorage.length === 0){
@@ -21,6 +22,7 @@ export default function Account(){
     GetFormData("personalFormData", setPersonalForm, true);
     GetFormData("nonDisclosureFormData", setNonDisclosureForm, true);
     GetFormData("skillsFormData", setSkills, true);
+    GetFormData("educationFormData", setEducationForms, false)
     //GetFormData("educationFormData");
     return(
         <Box>
