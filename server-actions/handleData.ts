@@ -1,3 +1,4 @@
+import { educationFormFormat, educationFormat } from "@/redux/features/forms/educationSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store"
 import exp from "constants";
 import { useDispatch } from "react-redux"
@@ -71,7 +72,29 @@ export async function GetFormData(tableName : string, setForm : Function, expect
         }).then((statusCode)=>{
             //Checking the status code to determine how to handle the request
             if(statusCode == 200){
-                dispatch(setForm({uploaded: true, ...data }))
+                switch(tableName){
+                    case "educationFormData":
+                        console.log("Updating education forms")
+                        let forms : Array<educationFormat> = JSON.parse(localStorage.getItem("educationForms") || "{}");
+                        forms.forEach(function(form, index){
+                            console.log(form);
+                            console.log("Looking for key " + data.key)
+                            if(form.key == data.key){
+                                console.log("Form key found: " + form.key)
+                                forms[index] = {key : data.key, values: {
+                                    ...data
+                                }}
+                                console.log(forms[index]);
+                                //Exits the foreach as it found what it needed
+                                return
+                            }
+                        });
+                        dispatch(setForm(forms))
+                        break;
+                    default:
+                        dispatch(setForm({uploaded: true, ...data }))
+                        break;
+                }
                 console.log(localStorage.getItem("personalForm"));
                 console.log(localStorage.getItem("nonDisclosureForm"));
                 // const personalForm = useAppSelector((state)=>state.personalReducer.value.personalForm)

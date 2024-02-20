@@ -29,6 +29,7 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
     const [successfulSave, setSuccessfulSave] = useState(false);
     const [failedSave, setFailedSave] = useState(false);
     
+    console.log(json)
     console.log(schoolName)
     //Saves the form
     const saveForm = async (e : MouseEvent, key : string) =>{
@@ -37,6 +38,7 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
 
         let upload : Promise<boolean> = saveData("educationFormData", {
             formId: formId,
+            key,
             schoolName: schoolName,
             GPA: GPA,
             endDate: endDate,
@@ -44,7 +46,7 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
             degree: degree,
             field: field,
             userId: localStorage.getItem("userId")
-        })
+        }, setEducationForms, dispatch)
 
         if(await upload == true){
             setSuccessfulSave(true)
@@ -54,25 +56,25 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
         let arr = [...selectorForms];
         console.log(key);
         //Goes through each form and uses an anoynmous function with two paramaters, using form as the form and index as an incrementing value
-        arr.forEach(function(form, index){
-            //If the two keys match, it will replace that form with a new value consisting of new data
-            if(form.key == key){
-                arr[index] = {key : key, values: {
-                    uploaded: true,
-                    formId: formId,
-                    schoolName: schoolName,
-                    GPA: GPA,
-                    endDate: endDate,
-                    startDate: startDate,
-                    degree: degree,
-                    field: field
-                }}
-                //Exits the foreach as it found what it needed
-                return
-            }
-        })
-            dispatch(setEducationForms(arr))
-            console.log(localStorage.getItem('personalForm'));
+        // arr.forEach(function(form, index){
+        //     //If the two keys match, it will replace that form with a new value consisting of new data
+        //     if(form.key == key){
+        //         arr[index] = {key : key, values: {
+        //             uploaded: true,
+        //             formId: formId,
+        //             schoolName: schoolName,
+        //             GPA: GPA,
+        //             endDate: endDate,
+        //             startDate: startDate,
+        //             degree: degree,
+        //             field: field
+        //         }}
+        //         //Exits the foreach as it found what it needed
+        //         return
+        //     }
+        // })
+            //dispatch(setEducationForms(arr))
+            console.log(localStorage.getItem('educationForms'));
         }else{
             setFailedSave(true);
             setSuccessfulSave(false);
@@ -88,7 +90,7 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
             {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}            
             <div className="flex flex-col">
                 <label>School Name</label>
-                <input type="text" placeholder="Example State University" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSchoolName(e.target.value)}/>
+                <input type="text" placeholder="Example State University" value={schoolName} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSchoolName(e.target.value)}/>
             </div> 
             <div className="flex flex-col">
                 <label>GPA</label>
