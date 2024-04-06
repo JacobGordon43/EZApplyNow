@@ -37,7 +37,9 @@ export const education = createSlice({
     reducers: {
         setEducationForms: (state, action: PayloadAction<Array<educationFormat>>) =>{
             localStorage.setItem("educationForms", JSON.stringify(action.payload))
-            console.log(localStorage.getItem("educationForms"));
+            console.log(action.payload)
+
+            // console.log(localStorage.getItem("educationForms"));
             return{
                 value:{
                     forms: action.payload

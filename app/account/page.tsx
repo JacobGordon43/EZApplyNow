@@ -23,7 +23,7 @@ export default function Account(){
     GetFormData("nonDisclosureFormData", setNonDisclosureForm, true);
     GetFormData("skillsFormData", setSkills, true);
     GetFormData("educationFormData", setEducationForms, false)
-    //GetFormData("educationFormData");
+    // GetFormData("educationFormData");
     return(
         <Box>
             <TopSection title="Account"/>

@@ -32,7 +32,34 @@ export async function GetFormData(tableName : string, setForm : Function, expect
             //We parse the body and use it to set the new global state management for the form that we were doing this for.
             body = JSON.parse(body.body)
             console.log(body);
-            dispatch(setForm({uploaded: true, ...body.result }))
+            console.log(body.result)
+            if(tableName == "educationFormData"){
+                let arr : Array<educationFormat> = []
+                body.result.forEach((form : any) => {
+                    //TODO Create a new form object and set its values to the existing form
+                    const newForm : educationFormat = {
+                        key: form.key,
+                        values: {
+                            uploaded: true,
+                            endDate : form.endDate,
+                            startDate : form.startDate,
+                            GPA : form.GPA,
+                            schoolName : form.schoolName,
+                            degree: form.degree,
+                            field: form.field,
+                            formId: form.formId
+                        }
+                    }
+                    arr.push(newForm)
+                    console.log(arr);
+                })
+                if(arr.length > 0){
+                    dispatch(setForm(arr))
+                }
+
+            }else{
+                dispatch(setForm({uploaded: true, ...body.result }))
+            }
             
         }
         )

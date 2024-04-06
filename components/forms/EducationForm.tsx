@@ -34,11 +34,11 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
     //Saves the form
     const saveForm = async (e : MouseEvent, key : string) =>{
         e.preventDefault();
-
+        console.log(key)
 
         let upload : Promise<boolean> = saveData("educationFormData", {
             formId: formId,
-            key,
+            key: key,
             schoolName: schoolName,
             GPA: GPA,
             endDate: endDate,
@@ -94,27 +94,24 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
             </div> 
             <div className="flex flex-col">
                 <label>GPA</label>
-                <input type="text" placeholder="0.00" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setGPA(e.target.value)}/>
+                <input type="text" placeholder="0.00" className="p-1 border-[#eee] border-2 shadow-sm" value={GPA} onChange={(e)=>setGPA(e.target.value)}/>
             </div> 
             <div className="flex flex-col">
                 <label>Start Date</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setStartDate(e.target.value)}/>
+                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={startDate} onChange={(e)=>setStartDate(e.target.value)}/>
             </div>
             <div className="flex flex-col">
                 <label>Graduation (Actual or Expected)</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEndDate(e.target.value)}/>
+                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={endDate} onChange={(e)=>setEndDate(e.target.value)}/>
             </div>  
             <div className="flex flex-col">
                 <label>Degree Type</label>
-                <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setDegree(e.target.value)}>
-                    <option>Bachelor</option>
-                    <option>Master's</option>
-                    <option>Certification</option>
-                </select>
+                <input type="text" placeholder="Bachelor" className="p-1 border-[#eee] border-2 shadow-sm" value={degree} onChange={(e)=>setDegree(e.target.value)}/>
+
             </div>
             <div className="flex flex-col">
                 <label>Field of Study</label>
-                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setField(e.target.value)}/>
+                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" value={field} onChange={(e)=>setField(e.target.value)}/>
             </div>
             <Box className="flex flex-col mt-3 tablet:flex-row">
                 <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>
