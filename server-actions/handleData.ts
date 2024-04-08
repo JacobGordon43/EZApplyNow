@@ -1,4 +1,5 @@
 import { educationFormFormat, educationFormat } from "@/redux/features/forms/educationSlice";
+import { workFormat } from "@/redux/features/forms/workSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store"
 import exp from "constants";
 import { useDispatch } from "react-redux"
@@ -57,7 +58,31 @@ export async function GetFormData(tableName : string, setForm : Function, expect
                     dispatch(setForm(arr))
                 }
 
-            }else{
+            }else if(tableName == "workFormData"){
+                let arr : Array<workFormat> = []
+                console.log(body)
+                body.result.foreach((form : any) =>{
+                    const newForm : workFormat = {
+                        key: form.key,
+                        values: {
+                            uploaded: true,
+                            to: form.to,
+                            from: form.from,
+                            title: form.workTitle,
+                            company: form.company,
+                            description: form.description,
+                            location: form.location,
+                            formId: form.formId
+                        }
+                    }
+                    arr.push(newForm)
+                    console.log(newForm)
+                })
+                if(arr.length > 0){
+                    dispatch(setForm(arr))
+                }
+            }
+            else{
                 dispatch(setForm({uploaded: true, ...body.result }))
             }
             

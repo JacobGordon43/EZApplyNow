@@ -5,6 +5,7 @@ import educationReducer from './features/forms/educationSlice';
 import personalReducer from './features/forms/personalSlice';
 import disclosureReducer from './features/forms/nonDisclosureSlice';
 import skillReducer from './features/forms/skillsSlice';
+import workReducer from './features/forms/workSlice'
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 //Creates a store that we use to provide the reducers to the application.
 export const store = configureStore({
@@ -14,7 +15,8 @@ export const store = configureStore({
         educationReducer,
         personalReducer,
         disclosureReducer,
-        skillReducer
+        skillReducer,
+        workReducer
     }
 })
 

@@ -1,151 +1,96 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
-import Link from "next/link";
-import {login, logout} from "../../redux/features/authSlice"
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, setErrors, errorFormat, errorMessages } from "@/redux/features/errorSlice";
+import { setEducationForms } from "@/redux/features/forms/educationSlice";
 import { useAppSelector, AppDispatch } from "@/redux/store";
 import { MouseEvent, useEffect, useState } from "react";
-import { validateEmail, validatePassword } from "@/server-actions/validation";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
-//import router from "next/router"
-import { useRouter } from "next/navigation";
+import {saveData} from '../../server-actions/handleData'
 
-export default function LoginForm(){
+interface WorkForm {
+    deleteBtn : React.ReactNode,
+    formKey : string
+}
+export default function WorkForm({ formKey, deleteBtn} : WorkForm){
     const dispatch = useDispatch<AppDispatch>();
-    const [schoolName, setSchoolName] = useState("");
-    const [GPA, setGPA] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [county, setCounty] = useState("");
-    const [Zipcode, setZipcode] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [phoneNumberType, setPhoneNumberType] = useState("");
-    //const [statusCode, setStatusCode] = useState(0);
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [loginError, setLoginError] = useState(false)
-    const [loginErrorMessage, setLoginErrorMessage] = useState("There was an issue logging in.")
-    const errors = useAppSelector((state)=>state.errorMessagesReducer.value.errors);
-    const router = useRouter();
-    //dispatch(clearErrors())
-
-    useEffect(()=>{
-        setEmailError(false);
-        setPasswordError(false);
-        setLoginError(false);
-        errors.map((error: { input: string, message : string })=>{
-            if(error.input == "email"){
-                setEmailError(true)
-            }
+    const json = JSON.parse(localStorage.getItem("workForms") || "{}")
+    const form = json.at(formKey);
+    console.log(form)
+    // dispatch(setEducationForms(json))
+    const selectorForms = useAppSelector((state) => state.educationReducer.value.forms)
+    const [formId, setFormId] = useState(form.values.formId);
+    const [workTitle, setWorkTitle] = useState(form.values.workTitle);
+    const [company, setCompany] = useState(form.values.COMPANY);
+    const [to, setTo] = useState(form.values.to);
+    const [from, setFrom] = useState(form.values.from);
+    const [description, setDescription] = useState(form.values.location);
+    const [location, setLocation] = useState(form.values.description);
+    const [successfulSave, setSuccessfulSave] = useState(false);
+    const [failedSave, setFailedSave] = useState(false);
     
-            if(error.input == "password"){
-                setPasswordError(true)
-            }
+    console.log(json)
+    //Saves the form
+    const saveForm = async (e : MouseEvent, key : string) =>{
+        e.preventDefault();
+        console.log(key)
 
-            if(error.input == "login"){
-                setLoginError(true);
-                setLoginErrorMessage(error.message)
-            }
-        })    
-    }, [emailError, errors, passwordError, loginError, loginErrorMessage] )
-    
-//     async function loginAccount(e : MouseEvent){
-//         e.preventDefault();
-//         //const router = useRouter();
-//         let statusCode = 0;
-//         console.log("In login function");
-//         let errorMessages : Array<errorFormat> = [];
-//         let message = "";
-//         //Creates error messages if either fail validation
-//         if(!validateEmail(email)){
-//             errorMessages.push({input:"email", message:"The email provided is not in an email format"})
-//         }    
-//         if(!validatePassword(password)){
-//             errorMessages.push({input:"password", message:"Your password must be 8 characters long and include a lowercase, uppercase, special, and numerical character"})
-//         }
-//         //Prevents a call from being made to the API gateway if there are any error messages
-//         if(errorMessages.length == 0){
-//             dispatch(clearErrors())
-//             await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/login", {
-//             method: "POST",
-//             headers:{
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({
-//                 "domainName": "localhost.com/login",
-//                 "domainPrefix": "localhost",
-//                 "time": new Date(),
-//                 "body": {
-//                     "email": email,
-//                     "password": password
-//                 }
-//                 })
-//             }).then((res)=>{
-//                 //Setting the statusCode to check later
-//                 statusCode = res.status
-//                 console.log(statusCode);
-//                 //Returning the body of the data, which contains our message
-//                 return res.json()
-//             }).then((data)=>{
-//                 //Checking the status code to determine how to handle the request
-//                 if(statusCode == 401){
-//                     errorMessages.push({input: "login", message: data.message})
-//                 }else if(statusCode == 200){
-//                     console.log({email, uid:data.userId, name:data.name})
-//                     document.cookie = `email=${email}; userId=${data.userId}; name=${data.name}`
-//                     console.log(document.cookie);
-//                     dispatch(login({email, uid:data.userId, name:data.name}));
-//                     router.push("/");
-//                 }else{
-//                     errorMessages.push({input: "signup", message: "There was an issue with the server. Please try again later."})
-//                 }
-//             })
-//         }
-//         dispatch(setErrors(errorMessages))
-//         console.log(errors);
-// }
+        let upload : Promise<boolean> = saveData("educationFormData", {
+            formId: formId,
+            key: key,
+            workTitle: workTitle,
+            company: company,
+            to: to,
+            from: from,
+            location: location,
+            description: description,
+            userId: localStorage.getItem("userId")
+        }, setEducationForms, dispatch)
+
+        if(await upload == true){
+            setSuccessfulSave(true)
+            setFailedSave(false)
+            console.log(localStorage.getItem('educationForms'));
+        }else{
+            setFailedSave(true);
+            setSuccessfulSave(false);
+        }
+
+        console.log(selectorForms);
+    }
+
 
     return(
         <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
-            {loginError && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 mt-2 rounded-md">{loginErrorMessage}</Box>}
+            {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}
+            {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}            
             <div className="flex flex-col">
-                <label>School Name</label>
-                <input type="text" placeholder="Example State University" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSchoolName(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>Title</label>
+                <input type="text" placeholder="Position" value={workTitle} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setWorkTitle(e.target.value)}/>
             </div> 
             <div className="flex flex-col">
-                <label>GPA</label>
-                <input type="text" placeholder="0.00" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setGPA(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>Company</label>
+                <input type="text" placeholder="Company Name" className="p-1 border-[#eee] border-2 shadow-sm" value={company} onChange={(e)=>setCompany(e.target.value)}/>
             </div> 
             <div className="flex flex-col">
-                <label>Start Date</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setStartDate(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>From</label>
+                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={from} onChange={(e)=>setFrom(e.target.value)}/>
             </div>
             <div className="flex flex-col">
-                <label>Graduation (Actual or Expected)</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEndDate(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>To (leave blank if currently working there)</label>
+                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={to} onChange={(e)=>setTo(e.target.value)}/>
             </div>  
             <div className="flex flex-col">
-                <label>Degree Type</label>
-                <select className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setEndDate(e.target.value)}>
-                    <option>Bachelor</option>
-                    <option>Master's</option>
-                    <option>Certification</option>
-
-                </select>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>Location</label>
+                <input type="text" placeholder="City, State" className="p-1 border-[#eee] border-2 shadow-sm" value={location} onChange={(e)=>setLocation(e.target.value)}/>
             </div>
             <div className="flex flex-col">
-                <label>Field of Study</label>
-                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setPhoneNumber(e.target.value)}/>
-                {emailError && <Box className="flex justify-center items-center bg-red-600 h-10 p-2 mt-2 rounded-md">The email is not in an email format</Box>}
+                <label>Description</label>
+                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" value={description} onChange={(e)=>setDescription(e.target.value)}/>
             </div>
-            <Box className="flex flex-col mt-3 tablet:flex-row justify-between">
-                <Button text="Save" className="px-3 bg-[#2DC653]" onClick={(e)=> console.log('clicked')}/>
+            <Box className="flex flex-col mt-3 tablet:flex-row">
+                <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>
+                {deleteBtn}
             </Box>
         </form>
     )

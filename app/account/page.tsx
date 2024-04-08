@@ -13,6 +13,8 @@ import { setNonDisclosureForm } from "@/redux/features/forms/nonDisclosureSlice"
 import { useRouter } from "next/navigation";
 import { setSkills } from "@/redux/features/forms/skillsSlice";
 import { setEducationForms } from "@/redux/features/forms/educationSlice";
+import { setWorkForms } from "@/redux/features/forms/workSlice";
+import WorkContainer from "@/components/forms/WorkContainer";
 export default function Account(){
     const router = useRouter();
     if(localStorage.length === 0){
@@ -23,13 +25,13 @@ export default function Account(){
     GetFormData("nonDisclosureFormData", setNonDisclosureForm, true);
     GetFormData("skillsFormData", setSkills, true);
     GetFormData("educationFormData", setEducationForms, false)
-    // GetFormData("educationFormData");
+    GetFormData("workFormData", setWorkForms, false)
     return(
         <Box>
             <TopSection title="Account"/>
             <FormDropdown value="personalForm" text="Personal Information"><PersonalForm /></FormDropdown>
             <FormDropdown value="education" text="Education"><EducationContainer /></FormDropdown>
-            <FormDropdown value="workHistory" text="Work History"><EducationContainer /></FormDropdown>
+            <FormDropdown value="workHistory" text="Work History"><WorkContainer /></FormDropdown>
             <FormDropdown value="skills" text="Skills"><SkillsForm /></FormDropdown>
             <FormDropdown value="nonDisclosureForm" text="Non Disclosure Information"><NonDisclosureForm /></FormDropdown>
         </Box>
