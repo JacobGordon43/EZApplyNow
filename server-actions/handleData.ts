@@ -61,7 +61,7 @@ export async function GetFormData(tableName : string, setForm : Function, expect
             }else if(tableName == "workFormData"){
                 let arr : Array<workFormat> = []
                 console.log(body)
-                body.result.foreach((form : any) =>{
+                body.result.forEach((form : any) =>{
                     const newForm : workFormat = {
                         key: form.key,
                         values: {

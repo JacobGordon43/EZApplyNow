@@ -35,7 +35,7 @@ export default function WorkForm({ formKey, deleteBtn} : WorkForm){
         e.preventDefault();
         console.log(key)
 
-        let upload : Promise<boolean> = saveData("educationFormData", {
+        let upload : Promise<boolean> = saveData("workFormData", {
             formId: formId,
             key: key,
             workTitle: workTitle,
@@ -86,7 +86,7 @@ export default function WorkForm({ formKey, deleteBtn} : WorkForm){
             </div>
             <div className="flex flex-col">
                 <label>Description</label>
-                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" value={description} onChange={(e)=>setDescription(e.target.value)}/>
+                <input type="text" placeholder="Explain some of your daily functions" className="p-1 border-[#eee] border-2 shadow-sm" value={description} onChange={(e)=>setDescription(e.target.value)}/>
             </div>
             <Box className="flex flex-col mt-3 tablet:flex-row">
                 <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>

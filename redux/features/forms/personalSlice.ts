@@ -15,6 +15,7 @@ export type personalFormFormat = {
     lastName : string,
     address : string,
     state : string,
+    city: string,
     county : string,
     zipcode : string,
     phoneNumber : string,

@@ -19,6 +19,7 @@ export default function PersonalForm(){
     const [address, setAddress] = useState(json.address);
     const [state, setState] = useState(json.state);
     const [county, setCounty] = useState(json.county);
+    const [city, setCity] = useState(json.city);
     const [zipcode, setZipcode] = useState(json.zipcode);
     const [phoneNumber, setPhoneNumber] = useState(json.phoneNumber);
     const [phoneNumberType, setPhoneNumberType] = useState(json.phoneNumberType);
@@ -40,6 +41,7 @@ export default function PersonalForm(){
             firstName,
             lastName,
             address, 
+            city,
             county,
             state,
             zipcode,
@@ -79,6 +81,10 @@ export default function PersonalForm(){
                 <div className="flex flex-col">
                     <label>State</label>
                     <input type="text" placeholder="Arizona" value={state} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setState(e.target.value)}/>
+                </div>  
+                <div className="flex flex-col">
+                    <label>City</label>
+                    <input type="text" placeholder="Phoenix" value={city} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setCity(e.target.value)}/>
                 </div>  
                 <div className="flex flex-col">
                     <label>County</label>
