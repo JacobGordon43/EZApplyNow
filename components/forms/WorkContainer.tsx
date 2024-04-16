@@ -6,9 +6,8 @@ import { useAppSelector, AppDispatch } from "@/redux/store";
 import {v4 as uuidv4} from 'uuid';
 import { setWorkForms, workFormat } from "@/redux/features/forms/workSlice";
 import WorkForm from "./WorkForm";
-
-export default function EducationContainer(){
-    //let forms : React.ReactNode[] = [<EducationForm />
+import { deleteForm } from "@/server-actions/handleData";
+export default function WorkContainer(){
     const selectorForms = useAppSelector((state) => state.workReducer.value.forms)
     const forms : Array<workFormat> = JSON.parse(localStorage.getItem("workForms") || "[]")
     console.log(forms)
@@ -16,9 +15,12 @@ export default function EducationContainer(){
     const [localForms, setLocalForms] = useState(Array<React.ReactNode>)
     const dispatch = useDispatch<AppDispatch>();
     console.log(selectorForms);
-    const deleteForm = (e : MouseEvent, key : string)=> {
+    const deleteFunction = async (e : MouseEvent, key : string)=> {
         e.preventDefault();
         let arr = selectorForms;
+        const form = forms.find((f: workFormat) => f.key === key)
+        let formId = form?.values.formId
+        await deleteForm("workFormData", formId!)
         arr = arr.filter(item => item.key !== key)
         dispatch(setWorkForms(arr));
     }
@@ -28,7 +30,7 @@ export default function EducationContainer(){
             {
                 // forms.length > 0 &&
                 forms.map(form=>{
-                    let deleteBtn = <Button text="Delete" className="bg-red-500 mb-3 tablet:mb-0" onClick={(e)=>{deleteForm(e, form.key)}}/>
+                    let deleteBtn = <Button text="Delete" className="bg-red-500 mb-3 tablet:mb-0" onClick={(e)=>{deleteFunction(e, form.key)}}/>
                     //let saveBtn = <Button text="Sae" className="bg-red-500 mb-3 tablet:mb-0" onClick={(e)=>{saveForm(e, form.key)}}/>
                     let newForm = <WorkForm key={form.key} formKey={form.key} deleteBtn={deleteBtn}/>
                     return newForm
@@ -42,7 +44,7 @@ export default function EducationContainer(){
                     values: {
                         uploaded: false,
                         formId: "",
-                        title: "",
+                        workTitle: "",
                         company: "",
                         location: "",
                         description: "",

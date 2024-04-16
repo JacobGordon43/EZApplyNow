@@ -12,7 +12,7 @@ interface LoginForm {
     deleteBtn : React.ReactNode,
     formKey : string
 }
-export default function LoginForm({ formKey, deleteBtn} : LoginForm){
+export default function EducationForm({ formKey, deleteBtn} : LoginForm){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("educationForms") || "{}")
     const form = json.at(formKey);
@@ -85,39 +85,42 @@ export default function LoginForm({ formKey, deleteBtn} : LoginForm){
 
 
     return(
-        <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
+        <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px]">
             {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}
             {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}            
-            <div className="flex flex-col">
-                <label>School Name</label>
-                <input type="text" placeholder="Example State University" value={schoolName} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSchoolName(e.target.value)}/>
-            </div> 
-            <div className="flex flex-col">
-                <label>GPA</label>
-                <input type="text" placeholder="0.00" className="p-1 border-[#eee] border-2 shadow-sm" value={GPA} onChange={(e)=>setGPA(e.target.value)}/>
-            </div> 
-            <div className="flex flex-col">
-                <label>Start Date</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={startDate} onChange={(e)=>setStartDate(e.target.value)}/>
-            </div>
-            <div className="flex flex-col">
-                <label>Graduation (Actual or Expected)</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={endDate} onChange={(e)=>setEndDate(e.target.value)}/>
-            </div>  
-            <div className="flex flex-col">
-                <label>Degree Type</label>
-                <input type="text" placeholder="Bachelor" className="p-1 border-[#eee] border-2 shadow-sm" value={degree} onChange={(e)=>setDegree(e.target.value)}/>
+            
+            <div className="desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
+                <div className="flex flex-col">
+                    <label>School Name</label>
+                    <input type="text" placeholder="Example State University" value={schoolName} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setSchoolName(e.target.value)}/>
+                </div> 
+                <div className="flex flex-col">
+                    <label>GPA</label>
+                    <input type="text" placeholder="0.00" className="p-1 border-[#eee] border-2 shadow-sm" value={GPA} onChange={(e)=>setGPA(e.target.value)}/>
+                </div> 
+                <div className="flex flex-col">
+                    <label>Start Date</label>
+                    <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={startDate} onChange={(e)=>setStartDate(e.target.value)}/>
+                </div>
+                <div className="flex flex-col">
+                    <label>Graduation (Actual or Expected)</label>
+                    <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={endDate} onChange={(e)=>setEndDate(e.target.value)}/>
+                </div>  
+                <div className="flex flex-col">
+                    <label>Degree Type</label>
+                    <input type="text" placeholder="Bachelor" className="p-1 border-[#eee] border-2 shadow-sm" value={degree} onChange={(e)=>setDegree(e.target.value)}/>
 
+                </div>
+                <div className="flex flex-col">
+                    <label>Field of Study</label>
+                    <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" value={field} onChange={(e)=>setField(e.target.value)}/>
+                </div>
+                <Box className="flex flex-col mt-3 tablet:flex-row">
+                    <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>
+                    {/* {saveBtn} */}
+                    {deleteBtn}
+                </Box>
             </div>
-            <div className="flex flex-col">
-                <label>Field of Study</label>
-                <input type="text" placeholder="Ex. Computer Science" className="p-1 border-[#eee] border-2 shadow-sm" value={field} onChange={(e)=>setField(e.target.value)}/>
-            </div>
-            <Box className="flex flex-col mt-3 tablet:flex-row">
-                <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>
-                {/* {saveBtn} */}
-                {deleteBtn}
-            </Box>
         </form>
     )
 }

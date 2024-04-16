@@ -68,7 +68,7 @@ export async function GetFormData(tableName : string, setForm : Function, expect
                             uploaded: true,
                             to: form.to,
                             from: form.from,
-                            title: form.workTitle,
+                            workTitle: form.workTitle,
                             company: form.company,
                             description: form.description,
                             location: form.location,
@@ -126,22 +126,38 @@ export async function GetFormData(tableName : string, setForm : Function, expect
             if(statusCode == 200){
                 switch(tableName){
                     case "educationFormData":
-                        console.log("Updating education forms")
-                        let forms : Array<educationFormat> = JSON.parse(localStorage.getItem("educationForms") || "{}");
-                        forms.forEach(function(form, index){
+                        let educationForms : Array<educationFormat> = JSON.parse(localStorage.getItem("educationForms") || "{}");
+                        educationForms.forEach(function(form, index){
                             console.log(form);
                             console.log("Looking for key " + data.key)
                             if(form.key == data.key){
                                 console.log("Form key found: " + form.key)
-                                forms[index] = {key : data.key, values: {
+                                educationForms[index] = {key : data.key, values: {
                                     ...data
                                 }}
-                                console.log(forms[index]);
+                                console.log(educationForms[index]);
                                 //Exits the foreach as it found what it needed
                                 return
                             }
                         });
-                        dispatch(setForm(forms))
+                        dispatch(setForm(educationForms))
+                        break;
+                    case "workFormData":
+                        let workForms : Array<educationFormat> = JSON.parse(localStorage.getItem("workForms") || "{}");
+                        workForms.forEach(function(form, index){
+                            console.log(form);
+                            console.log("Looking for key " + data.key)
+                            if(form.key == data.key){
+                                console.log("Form key found: " + form.key)
+                                workForms[index] = {key : data.key, values: {
+                                    ...data
+                                }}
+                                console.log(workForms[index]);
+                                //Exits the foreach as it found what it needed
+                                return
+                            }
+                        });
+                        dispatch(setForm(workForms))
                         break;
                     default:
                         dispatch(setForm({uploaded: true, ...data }))
@@ -156,4 +172,26 @@ export async function GetFormData(tableName : string, setForm : Function, expect
                 return false
             }
         })
+    }
+
+    export async function deleteForm(tableName : string, formId : string){
+        console.log(formId)
+        return await fetch("https://tgcsxw5b6a.execute-api.us-west-1.amazonaws.com/dev/delete", {
+            method: "DELETE",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "domainName": "localhost.com",
+                "domainPrefix": "localhost",
+                "time": new Date(),
+                "body": {
+                    tableName,
+                    formId: formId
+                }
+                })
+                //We return only the status
+            }).then((res)=>res.json()).then((body)=>{
+                console.log(body)
+            })
     }

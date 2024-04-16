@@ -7,6 +7,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "../Button";
 import {saveData} from '../../server-actions/handleData'
+import { setWorkForms, workFormat } from "@/redux/features/forms/workSlice";
 
 interface WorkForm {
     deleteBtn : React.ReactNode,
@@ -15,17 +16,18 @@ interface WorkForm {
 export default function WorkForm({ formKey, deleteBtn} : WorkForm){
     const dispatch = useDispatch<AppDispatch>();
     const json = JSON.parse(localStorage.getItem("workForms") || "{}")
-    const form = json.at(formKey);
+    // const form = json.at(formKey);
+    const form = json.find((f: workFormat) => f.key === formKey)
     console.log(form)
     // dispatch(setEducationForms(json))
-    const selectorForms = useAppSelector((state) => state.educationReducer.value.forms)
+    const selectorForms = useAppSelector((state) => state.workReducer.value.forms)
     const [formId, setFormId] = useState(form.values.formId);
     const [workTitle, setWorkTitle] = useState(form.values.workTitle);
-    const [company, setCompany] = useState(form.values.COMPANY);
+    const [company, setCompany] = useState(form.values.company);
     const [to, setTo] = useState(form.values.to);
     const [from, setFrom] = useState(form.values.from);
-    const [description, setDescription] = useState(form.values.location);
-    const [location, setLocation] = useState(form.values.description);
+    const [description, setDescription] = useState(form.values.description);
+    const [location, setLocation] = useState(form.values.location);
     const [successfulSave, setSuccessfulSave] = useState(false);
     const [failedSave, setFailedSave] = useState(false);
     
@@ -45,7 +47,7 @@ export default function WorkForm({ formKey, deleteBtn} : WorkForm){
             location: location,
             description: description,
             userId: localStorage.getItem("userId")
-        }, setEducationForms, dispatch)
+        }, setWorkForms, dispatch)
 
         if(await upload == true){
             setSuccessfulSave(true)
@@ -61,37 +63,39 @@ export default function WorkForm({ formKey, deleteBtn} : WorkForm){
 
 
     return(
-        <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px] desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
+        <form className="mt-4 w-11/12 m-auto tablet:max-w-[800px]">
             {successfulSave && <Box className="flex justify-center items-center text-center bg-green-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved successfully</Box>}
-            {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}            
-            <div className="flex flex-col">
-                <label>Title</label>
-                <input type="text" placeholder="Position" value={workTitle} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setWorkTitle(e.target.value)}/>
-            </div> 
-            <div className="flex flex-col">
-                <label>Company</label>
-                <input type="text" placeholder="Company Name" className="p-1 border-[#eee] border-2 shadow-sm" value={company} onChange={(e)=>setCompany(e.target.value)}/>
-            </div> 
-            <div className="flex flex-col">
-                <label>From</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={from} onChange={(e)=>setFrom(e.target.value)}/>
+            {failedSave && <Box className="flex justify-center items-center text-center bg-red-600 p-2 min-h-10 my-2 rounded-md max-w-[300px] m-auto">Your account was saved not saved</Box>}    
+            <div className="desktop:grid desktop:grid-cols-2 desktop:gap-x-2">
+                <div className="flex flex-col">
+                    <label>Title</label>
+                    <input type="text" placeholder="Position" value={workTitle} className="p-1 border-[#eee] border-2 shadow-sm" onChange={(e)=>setWorkTitle(e.target.value)}/>
+                </div> 
+                <div className="flex flex-col">
+                    <label>Company</label>
+                    <input type="text" placeholder="Company Name" className="p-1 border-[#eee] border-2 shadow-sm" value={company} onChange={(e)=>setCompany(e.target.value)}/>
+                </div> 
+                <div className="flex flex-col">
+                    <label>From</label>
+                    <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={from} onChange={(e)=>setFrom(e.target.value)}/>
+                </div>
+                <div className="flex flex-col">
+                    <label>To (leave blank if currently working there)</label>
+                    <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={to} onChange={(e)=>setTo(e.target.value)}/>
+                </div>  
+                <div className="flex flex-col">
+                    <label>Location</label>
+                    <input type="text" placeholder="City, State" className="p-1 border-[#eee] border-2 shadow-sm" value={location} onChange={(e)=>setLocation(e.target.value)}/>
+                </div>
+                <div className="flex flex-col">
+                    <label>Description</label>
+                    <input type="text" placeholder="Explain some of your daily functions" className="p-1 border-[#eee] border-2 shadow-sm" value={description} onChange={(e)=>setDescription(e.target.value)}/>
+                </div>
+                <Box className="flex flex-col mt-3 tablet:flex-row">
+                    <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>
+                    {deleteBtn}
+                </Box>
             </div>
-            <div className="flex flex-col">
-                <label>To (leave blank if currently working there)</label>
-                <input type="text" placeholder="mm/yyyy" className="p-1 border-[#eee] border-2 shadow-sm" value={to} onChange={(e)=>setTo(e.target.value)}/>
-            </div>  
-            <div className="flex flex-col">
-                <label>Location</label>
-                <input type="text" placeholder="City, State" className="p-1 border-[#eee] border-2 shadow-sm" value={location} onChange={(e)=>setLocation(e.target.value)}/>
-            </div>
-            <div className="flex flex-col">
-                <label>Description</label>
-                <input type="text" placeholder="Explain some of your daily functions" className="p-1 border-[#eee] border-2 shadow-sm" value={description} onChange={(e)=>setDescription(e.target.value)}/>
-            </div>
-            <Box className="flex flex-col mt-3 tablet:flex-row">
-                <Button text="Save" className="px-3 bg-[#2DC653] tablet:mr-3 mb-3 tablet:mb-0" onClick={(e : React.MouseEvent)=> saveForm(e, formKey)}/>
-                {deleteBtn}
-            </Box>
         </form>
     )
 }

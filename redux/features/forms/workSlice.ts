@@ -12,7 +12,7 @@ export type workFormat = {
 export type workFormFormat = {
     uploaded : boolean
     formId : string,
-    title : string,
+    workTitle : string,
     company : string,
     to : string,
     from : string,
